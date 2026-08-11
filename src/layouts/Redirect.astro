@@ -1,0 +1,55 @@
+---
+/**
+ * A static redirect page.
+ *
+ * These exist to keep URLs alive across the Hashnode → GitHub Pages cutover.
+ * Every path here was live on sergiofrancisco.com and is potentially already
+ * shared — /resume in particular is the link recruiters have been given.
+ *
+ * GitHub Pages cannot issue a 30x for a static site, so this is a meta refresh
+ * plus a real link for anyone the refresh does not carry. `noindex` keeps the
+ * stub out of search results, and the canonical points at the destination so
+ * the old URL's ranking transfers rather than competing.
+ */
+interface Props {
+  to: string;
+  label: string;
+}
+
+const { to, label } = Astro.props;
+const isExternal = to.startsWith('http');
+const canonical = isExternal ? to : new URL(to, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirecting to {label}</title>
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0; url=${to}`} />
+    <link rel="canonical" href={canonical} />
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #08090a;
+        color: #787e86;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+        font-size: 14.5px;
+      }
+      a {
+        color: #e6e6e6;
+        text-underline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      This page has moved. <a href={to}>Continue to {label}</a>.
+    </p>
+  </body>
+</html>
