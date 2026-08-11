@@ -10,6 +10,12 @@ order: 3
 verified: 2026-08-11
 ---
 
+## The company
+
+Toptal is a talent network that also builds internal products. This one was a
+document remediation platform: taking documents that fail accessibility
+standards and making them conform, as a service.
+
 ## The engagement
 
 From July to November 2025 I was the only infrastructure engineer on a team of

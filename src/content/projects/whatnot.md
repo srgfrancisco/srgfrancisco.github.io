@@ -10,10 +10,14 @@ order: 6
 verified: 2026-08-11
 ---
 
+## The company
+
+Whatnot is a social marketplace for collectibles and goods, where discovery is
+the product — what a buyer is shown decides what gets sold.
+
 ## The problem
 
-Whatnot is a social marketplace for collectibles. Their recommendation engine
-ran on SpellML, and the platform had stopped fitting the problem in three
+Their recommendation engine ran on SpellML, and the platform had stopped fitting the problem in three
 distinct ways: it struggled as data volumes and model complexity grew, its
 rigidity slowed experimentation, and there was no mature MLOps practice
 governing the model lifecycle.

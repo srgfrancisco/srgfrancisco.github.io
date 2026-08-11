@@ -10,9 +10,14 @@ order: 9
 verified: 2026-08-11
 ---
 
+## The company
+
+Art of Problem Solving is an education company teaching advanced mathematics to
+students, online and in person.
+
 ## The problem
 
-Art of Problem Solving runs several education products — AoPS Academy, AoPS
+AoPS runs several education products — AoPS Academy, AoPS
 Online, Beast Academy, with more planned. Customers routinely buy access to
 more than one, and moving them between products required manual intervention
 every time.

@@ -10,10 +10,15 @@ order: 5
 verified: 2026-08-11
 ---
 
+## The company
+
+TeleTracking builds software for hospitals — patient flow and capacity
+management. Healthcare software carries a constraint most platforms do not:
+the migration cannot be visible to the people using it.
+
 ## The problem
 
-TeleTracking, a healthcare software company, was carrying three constraints at
-once on Azure: ongoing cost, infrastructure management that consumed
+They were carrying three constraints at once on Azure: ongoing cost, infrastructure management that consumed
 significant staff time, and a footprint that could not scale with the business.
 
 They had been planning a move for **more than three years** without one

@@ -10,6 +10,12 @@ order: 2
 verified: 2026-08-11
 ---
 
+## The company
+
+Kojo is a construction procurement SaaS running on AWS, with a main application
+that is still a monolith — which is the relevant fact here, because a monolith
+means one CI pipeline that every engineer waits on.
+
 ## The problem
 
 The main monolith's CI ran on CircleCI: a separate licence, a separate mental

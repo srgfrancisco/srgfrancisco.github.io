@@ -10,6 +10,12 @@ order: 8
 verified: 2026-08-11
 ---
 
+## The company
+
+EVgo runs one of the largest public fast-charging networks for electric
+vehicles in the US. Drivers depend on the apps working at the moment they are
+standing at a charger.
+
 ## The problem
 
 EVgo ran three applications — two Node.js backends and a React frontend — on

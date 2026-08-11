@@ -4,14 +4,20 @@ title: EC2 to ECS, at 12.5% of the cost
 summary: "Cut infrastructure cost 87.5% and application scaling time 88% on ECS."
 role: Senior DevOps Engineer
 deliveredVia: Toptal
-stack: [AWS, ECS, EC2, Autoscaling, Jenkins, GitHub Actions]
+years: "2023–2024"
+stack: [AWS, ECS, EC2, Autoscaling, Ruby on Rails, Jenkins, GitHub Actions]
 order: 4
 verified: 2026-08-11
 ---
 
+## The company
+
+CoinList is a cryptocurrency exchange — a platform where traffic is not
+smooth, and where being slow to scale during a spike is the same as being down.
+
 ## The problem
 
-CoinList is a cryptocurrency exchange. Workloads ran on EC2 instances sized for
+Workloads ran on EC2 instances sized for
 peak traffic and left running through the troughs — the standard failure mode
 of lift-and-shift infrastructure. Exchange traffic is spiky by nature, so the
 gap between provisioned and used capacity was large and permanent.

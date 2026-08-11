@@ -10,8 +10,11 @@ order: 1
 verified: 2026-08-11
 ---
 
-Kojo is a construction procurement SaaS running on AWS — EKS, Aurora Postgres,
-Datadog.
+## The company
+
+Kojo is a construction procurement SaaS. The platform runs on AWS — EKS for
+compute, Aurora Postgres for data, Datadog for monitoring — serving contractors
+who cannot afford for materials ordering to be down.
 
 ## The problem
 

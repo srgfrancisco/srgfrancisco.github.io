@@ -16,6 +16,7 @@
 
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, monospace;
+  --font-script: 'Caveat Variable', ui-rounded, cursive;
 }
 
 :root {
@@ -91,6 +92,15 @@ a {
 }
 .btn:hover {
   opacity: 0.9;
+}
+
+/* Signature in the footer. The one handwritten thing on the site. */
+.signature {
+  font-family: var(--font-script);
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--color-text);
 }
 
 .link-quiet {

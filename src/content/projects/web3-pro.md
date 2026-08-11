@@ -10,9 +10,15 @@ order: 7
 verified: 2026-08-11
 ---
 
+## The company
+
+Web3 Pro operates in the web3 space, working across subcontractors as well as
+its own teams — which is how the account sprawl below happened in the first
+place.
+
 ## The problem
 
-Web3 Pro was running **ten AWS accounts** — subcontractor, development, staging
+They were running **ten AWS accounts** — subcontractor, development, staging
 and production — with no unifying governance structure. Ten accounts that grew
 one at a time, each reasonable on its own, collectively impossible to answer
 basic questions about: who has access to what, what is being logged, what a new

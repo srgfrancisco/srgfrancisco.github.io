@@ -4,16 +4,26 @@ title: One manual EC2 box to containers on Fargate
 summary: "Terraform, Fargate and blue/green delivery over a hand-deployed instance."
 role: Senior DevOps Engineer
 deliveredVia: Toptal
+years: "2024"
 stack: [AWS, ECS Fargate, Terraform, RDS, OpenSearch, GitHub Actions, CodeDeploy, Cloudflare]
 order: 10
 verified: 2026-08-11
 ---
 
+## The company
+
+4 Elements Music is a music company whose platform ran on a single EC2
+instance, deployed by hand. Their developers were mid-rewrite at the time —
+moving the application off **Ruby on Rails** onto **Django** — so the
+infrastructure had to serve both the thing that existed and the thing being
+built.
+
 ## The problem
 
-4 Elements Music ran on a single EC2 instance, deployed by hand. That is a
-performance ceiling and an availability risk in the same object, and it makes
-every change a decision about whether the site can afford to be down.
+One manually-deployed instance is a performance ceiling and an availability
+risk in the same object, and it makes every change a decision about whether the
+site can afford to be down. Running a framework migration across that is worse
+again: you cannot stage a rewrite you cannot deploy twice.
 
 They wanted a modern, scalable platform, and the networking done properly this
 time.
