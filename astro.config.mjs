@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: 'https://sergiofrancisco.com',
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/og-card') })],
   vite: {
     plugins: [tailwindcss()],
   },

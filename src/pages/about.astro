@@ -1,15 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import Certifications from '../components/Certifications.astro';
 import { site } from '../site';
-
-const certifications = [
-  'KCNA — Kubernetes and Cloud Native Associate',
-  'AWS Certified Solutions Architect – Associate',
-  'HashiCorp Certified: Terraform Associate (002)',
-  'Google Cloud Certified Associate Cloud Engineer',
-  'CompTIA Network+',
-  'Red Hat Certified Engineer (RHCE) — historical',
-];
 
 const languages = [
   ['Portuguese', 'Native'],
@@ -45,15 +37,17 @@ const languages = [
       </p>
       <p>
         I have delivered as a DevOps Engineer, a Site Reliability Engineer, a
-        Platform Engineer and a Cloud Architect. I work from Rio de Janeiro, in
-        {site.timezone} — full overlap with US East.
+        Platform Engineer and a Cloud Architect. I work from Rio de Janeiro, in {
+          site.timezone
+        } — full overlap with US East.
       </p>
 
-      <h2>Certifications</h2>
-      <ul>
-        {certifications.map((item) => <li>{item}</li>)}
-      </ul>
+    </div>
 
+    <h2 class="label pt-14">Certifications</h2>
+    <Certifications />
+
+    <div class="prose pt-6">
       <h2>Education</h2>
       <p>
         <strong>Faculdade de Informática Lemos de Castro</strong> — Bachelor of
@@ -71,10 +65,12 @@ const languages = [
 
       <h2>Elsewhere</h2>
       <p>
-        <a href={site.github} rel="noopener">GitHub</a> ·
-        <a href={site.linkedin} rel="noopener">LinkedIn</a> ·
-        <a href={site.resume} rel="noopener">Résumé</a> ·
-        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <a href={site.github} rel="noopener">GitHub</a>{' · '}<a
+          href={site.linkedin}
+          rel="noopener">LinkedIn</a
+        >{' · '}<a href={site.resume} rel="noopener">Résumé</a>{' · '}<a
+          href={`mailto:${site.email}`}>{site.email}</a
+        >
       </p>
     </div>
   </div>
