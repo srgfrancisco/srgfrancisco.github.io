@@ -9,6 +9,34 @@ const facts = [
   ['Work authorisation', 'Brazilian citizen. No sponsorship required'],
 ];
 
+const services = [
+  {
+    name: 'Cloud Foundations & Migration',
+    body: 'Landing zones, multi-account governance, and moving workloads off what they are on today — datacentre, bare metal, or another cloud. Discovery and TCO first, so the move is a decision rather than a hope.',
+    proof: ['TeleTracking', 'EVgo', 'Web3 Pro'],
+  },
+  {
+    name: 'Infrastructure & DevOps Modernisation',
+    body: 'Infrastructure as code, GitOps delivery, and CI that returns engineer hours instead of consuming them. Terraform modules you own, pipelines without long-lived credentials.',
+    proof: ['Kojo', '4 Elements Music', 'Toptal'],
+  },
+  {
+    name: 'Application Modernisation',
+    body: 'Containers and orchestration on EKS or ECS Fargate, sized against real usage rather than peak. Right-sizing and autoscaling that hold up after I leave.',
+    proof: ['CoinList', 'Art of Problem Solving', 'Whatnot'],
+  },
+  {
+    name: 'Reliability & Observability',
+    body: 'SLOs with teeth, distributed tracing as a platform default, and incident response that produces durable fixes rather than mitigations.',
+    proof: ['Kojo', 'ETUS'],
+  },
+  {
+    name: 'Cloud Security & Compliance',
+    body: 'Least-privilege access, secrets out of pipelines, audit logging, and the infrastructure side of PCI-DSS. Controls documented well enough that they survive the first time they are inconvenient.',
+    proof: ['Dock', 'Web3 Pro', 'Kojo'],
+  },
+];
+
 const roles = [
   'Site Reliability Engineer',
   'Platform Engineer',
@@ -40,7 +68,24 @@ const roles = [
   </section>
 
   <div class="mx-auto w-full max-w-[52rem] px-6 py-12 sm:px-8">
-    <h2 class="label">Details</h2>
+    <h2 class="label">What I take on</h2>
+    <ul class="mt-6 border-t border-border">
+      {
+        services.map((service) => (
+          <li class="grid grid-cols-1 gap-x-8 gap-y-2 border-b border-border py-6 sm:grid-cols-[15rem_1fr]">
+            <h3 class="display text-[15px]">{service.name}</h3>
+            <div class="min-w-0">
+              <p class="max-w-[60ch] text-muted">{service.body}</p>
+              <p class="tnum mt-2 text-[12px] text-faint">
+                {service.proof.join(' · ')}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <h2 class="label pt-12">Details</h2>
     <dl class="mt-6 border-t border-border">
       {
         facts.map(([term, value]) => (

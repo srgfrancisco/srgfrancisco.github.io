@@ -4,18 +4,16 @@ import kcna from '../assets/certs/kcna.png';
 import awsSaa from '../assets/certs/aws-saa.png';
 import terraform from '../assets/certs/terraform.png';
 import networkPlus from '../assets/certs/network-plus.png';
+import gcpAce from '../assets/certs/gcp-ace.png';
 
 /**
  * Badge images are downloaded from Credly and served from this repo — linking
  * images.credly.com directly would be the site's only external request.
  *
- * `current: false` means Credly reports the credential as expired. Those are
- * shown but not linked: sending a recruiter to a page that says "(Expired)"
- * is worse than showing no link at all. Verified against Credly 2026-08-11.
- *
- * Google Cloud Associate Cloud Engineer has no URL. The link on that line in
- * the GitHub profile README points at the CompTIA Network+ badge, so the real
- * one is still unknown.
+ * `current: false` means Credly reports the credential as expired (checked
+ * 2026-08-11). Sérgio's call is to link them anyway — the industry does not
+ * treat a lapsed associate cert as a problem — so every badge is linked and
+ * the status is stated plainly instead.
  */
 const certifications = [
   {
@@ -30,28 +28,28 @@ const certifications = [
     issuer: 'Amazon Web Services',
     badge: awsSaa,
     current: false,
-    url: null,
+    url: 'https://www.credly.com/badges/9cea9ac7-b527-4caa-b9b4-370b0d746ede/public_url',
   },
   {
     name: 'HashiCorp Certified: Terraform Associate (002)',
     issuer: 'HashiCorp',
     badge: terraform,
     current: false,
-    url: null,
+    url: 'https://www.credly.com/badges/1ff76c72-cb64-468c-8964-5c69d6c750ca/public_url',
   },
   {
     name: 'Associate Cloud Engineer',
     issuer: 'Google Cloud',
-    badge: null,
+    badge: gcpAce,
     current: false,
-    url: null,
+    url: 'https://www.credly.com/badges/5214de1c-9f3c-4ca7-89a6-871b07cf349f/public_url',
   },
   {
     name: 'Network+',
     issuer: 'CompTIA',
     badge: networkPlus,
     current: false,
-    url: null,
+    url: 'https://www.credly.com/badges/3e35ca59-0cbe-450a-b1cf-ce32b85e0016/public_url',
   },
   {
     name: 'Red Hat Certified Engineer (RHCE)',
@@ -76,10 +74,7 @@ const certifications = [
                 width={80}
                 height={80}
                 loading="lazy"
-                class:list={[
-                  'h-10 w-10 object-contain',
-                  !cert.current && 'opacity-45 grayscale',
-                ]}
+                class="h-10 w-10 object-contain"
               />
             ) : (
               <span aria-hidden="true" class="h-px w-3 bg-border" />

@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import Case from '../layouts/Case.astro';
+
+/**
+ * The route is `/case-<slug>` rather than `/projects/<slug>` on purpose: the
+ * existing case studies are already published at those URLs and linked from
+ * LinkedIn and Toptal. Changing the pattern would break every link Sérgio has
+ * shared.
+ */
+export const getStaticPaths = (async () => {
+  const entries = await getCollection('projects', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { client, title, summary, role, deliveredVia, years, stack } = entry.data;
+---
+
+<Case
+  title={title}
+  eyebrow={client}
+  description={summary}
+  role={role}
+  deliveredVia={deliveredVia}
+  years={years}
+  stack={stack}
+>
+  <Content />
+</Case>

@@ -5,7 +5,7 @@ import Hero from '../components/Hero.astro';
 import WorkList from '../components/WorkList.astro';
 import BuiltCard from '../components/BuiltCard.astro';
 
-const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
+const work = (await getCollection('projects', ({ data }) => !data.draft)).sort(
   (a, b) => a.data.order - b.data.order
 );
 const built = (await getCollection('built', ({ data }) => !data.draft)).sort(

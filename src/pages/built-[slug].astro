@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
-import Case from '../../layouts/Case.astro';
+import Case from '../layouts/Case.astro';
 
 export const getStaticPaths = (async () => {
   const entries = await getCollection('built', ({ data }) => !data.draft);
@@ -20,7 +20,7 @@ const { name, summary, stack, license, repo, pypi } = entry.data;
   title={name}
   eyebrow="Open source"
   description={summary}
-  meta={license}
+  role={license}
   stack={stack}
 >
   <p>
