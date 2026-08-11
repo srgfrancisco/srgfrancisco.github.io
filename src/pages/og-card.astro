@@ -1,0 +1,52 @@
+---
+/**
+ * Source for `public/og.jpg`, not a published page — it is excluded from the
+ * sitemap and marked noindex. Regenerate by screenshotting this route at
+ * 1200x630 and saving the result over public/og.jpg.
+ */
+import { Image } from 'astro:assets';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import portrait from '../assets/portrait.jpg';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>OG card</title>
+    <meta name="robots" content="noindex" />
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="hero-glow flex h-[630px] w-[1200px] flex-col justify-between p-20"
+      style="background-color: #08090a"
+    >
+      <div class="flex items-center gap-6">
+        <Image
+          src={portrait}
+          alt=""
+          width={200}
+          height={200}
+          class="h-[100px] w-[100px] border border-border object-cover"
+        />
+        <div>
+          <p class="display text-[30px]">Sérgio Francisco</p>
+          <p class="label mt-2">Infrastructure Engineer · Rio de Janeiro</p>
+        </div>
+      </div>
+
+      <p class="display text-[86px]">I make production boring.</p>
+
+      <div class="flex items-end justify-between">
+        <p class="text-[24px] text-muted">Reliable, observable and cheaper to run.</p>
+        <p class="tnum text-[20px] text-faint">sergiofrancisco.com</p>
+      </div>
+    </div>
+  </body>
+</html>

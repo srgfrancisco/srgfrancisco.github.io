@@ -1,0 +1,57 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  eyebrow: string;
+  description: string;
+  role?: string;
+  deliveredVia?: string;
+  years?: string;
+  stack: string[];
+}
+
+const { title, eyebrow, description, role, deliveredVia, years, stack } =
+  Astro.props;
+
+const facts = [
+  years && ['Delivered', years],
+  role && ['Role', role],
+  deliveredVia && ['Contract', deliveredVia],
+].filter(Boolean) as [string, string][];
+---
+
+<Base title={`${eyebrow} — ${title}`} description={description}>
+  <article>
+    <header class="border-b border-border">
+      <div class="mx-auto w-full max-w-[52rem] px-6 pt-16 pb-10 sm:px-8 sm:pt-20">
+        <p class="label">{eyebrow}</p>
+        <h1 class="display mt-4 text-[30px] sm:text-[38px]">{title}</h1>
+        <p class="mt-4 max-w-[52ch] text-muted">{description}</p>
+        <dl class="mt-8 flex flex-wrap gap-x-10 gap-y-4">
+          {
+            facts.map(([term, value]) => (
+              <div>
+                <dt class="label">{term}</dt>
+                <dd class="tnum mt-1 text-[13px]">{value}</dd>
+              </div>
+            ))
+          }
+          <div class="min-w-0">
+            <dt class="label">Stack</dt>
+            <dd class="tnum mt-1 text-[13px] text-muted">{stack.join(' · ')}</dd>
+          </div>
+        </dl>
+      </div>
+    </header>
+
+    <div class="mx-auto w-full max-w-[52rem] px-6 py-12 sm:px-8">
+      <div class="prose">
+        <slot />
+      </div>
+      <p class="mt-16 border-t border-border pt-6 text-[13px]">
+        <a href="/#work" class="link-quiet">← All projects</a>
+      </p>
+    </div>
+  </article>
+</Base>

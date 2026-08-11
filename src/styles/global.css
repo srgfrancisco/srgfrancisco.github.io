@@ -1,0 +1,190 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #08090a;
+  --color-surface: #131313;
+  --color-text: #e6e6e6;
+  --color-muted: #8a8f98;
+  /*
+   * Raised from the mockup's #5d6268, which measured 3.24:1 against --color-bg
+   * and failed WCAG AA at the 11-12px sizes it is actually used at (labels,
+   * period column, footer meta). #787e86 measures 4.87:1 and keeps three
+   * distinct steps of hierarchy: 15.97 / 6.13 / 4.87.
+   */
+  --color-faint: #787e86;
+  --color-border: #1c1f23;
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, monospace;
+  --font-script: 'Caveat Variable', ui-rounded, cursive;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  background: var(--color-bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  line-height: 1.62;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display type: aggressive negative tracking, weight 590. */
+.display {
+  font-weight: 590;
+  letter-spacing: -0.028em;
+  line-height: 1.05;
+  color: var(--color-text);
+}
+
+/* 11px uppercase label. Structural, never body copy. */
+.label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+  font-weight: 500;
+}
+
+.tnum {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* The single ornament of the site. */
+.hero-glow {
+  background-image: radial-gradient(
+    60% 70% at 12% 0%,
+    rgba(120, 140, 170, 0.09) 0%,
+    rgba(8, 9, 10, 0) 72%
+  );
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/*
+ * Primary CTA. Written out rather than composed from utilities because
+ * `text-bg` collides with Tailwind's font-size namespace and silently
+ * resolves to nothing, leaving an unreadable white-on-white button.
+ */
+.btn {
+  display: inline-block;
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0.625rem 1rem;
+  transition: opacity 0.15s ease;
+}
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Signature in the footer. The one handwritten thing on the site. */
+.signature {
+  font-family: var(--font-script);
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.link-quiet {
+  font-size: 13px;
+  color: var(--color-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 4px;
+  transition: color 0.15s ease;
+}
+.link-quiet:hover {
+  color: var(--color-text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* Long-form markdown body used by case and built pages. */
+.prose {
+  color: var(--color-text);
+  max-width: 68ch;
+}
+.prose > * + * {
+  margin-top: 1.15em;
+}
+.prose h2 {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  font-weight: 500;
+  margin-top: 3.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+.prose h3 {
+  font-size: 15px;
+  font-weight: 590;
+  letter-spacing: -0.012em;
+  margin-top: 2rem;
+}
+.prose p,
+.prose li {
+  color: #cfd2d6;
+}
+.prose ul {
+  padding-left: 1.05rem;
+  list-style: none;
+}
+.prose li {
+  position: relative;
+}
+.prose li + li {
+  margin-top: 0.5em;
+}
+.prose li::before {
+  content: '';
+  position: absolute;
+  left: -1.05rem;
+  top: 0.72em;
+  width: 5px;
+  height: 1px;
+  background: var(--color-faint);
+}
+.prose strong {
+  color: var(--color-text);
+  font-weight: 590;
+}
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 0.1em 0.35em;
+}
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-faint);
+}
+.prose a:hover {
+  text-decoration-color: var(--color-text);
+}

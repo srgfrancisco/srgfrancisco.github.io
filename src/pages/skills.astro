@@ -1,0 +1,105 @@
+---
+import Base from '../layouts/Base.astro';
+import { groups, levelRank, type Level } from '../data/skills';
+
+const legend: { level: Level; meaning: string }[] = [
+  { level: 'Expert', meaning: 'Designed and owned it in production, across more than one engagement.' },
+  { level: 'Strong', meaning: 'Built with it in production. Holds up under a deep technical interview.' },
+  { level: 'Competent', meaning: 'Real production use — more often operated than designed.' },
+];
+---
+
+<Base
+  title="Skills"
+  description="Skills, years of experience and honest depth — including what is dormant and what I operated rather than designed."
+>
+  <section class="border-b border-border">
+    <div class="mx-auto w-full max-w-[52rem] px-6 pt-16 pb-10 sm:px-8 sm:pt-20">
+      <p class="label">Skills</p>
+      <h1 class="display mt-4 text-[30px] sm:text-[38px]">
+        What I know, and how well.
+      </h1>
+      <p class="mt-4 max-w-[56ch] text-muted">
+        Years are the span since first professional use, which is the market
+        convention. Where something has gone <strong class="text-text"
+          >dormant</strong
+        > I say so, because an unqualified number on a skill I have not touched in
+        years is both misleading and easy to check. Where I have no confirmed
+        start date, there is no number.
+      </p>
+    </div>
+  </section>
+
+  <div class="mx-auto w-full max-w-[52rem] px-6 py-12 sm:px-8">
+    <h2 class="label">How to read the levels</h2>
+    <dl class="mt-6 border-t border-border">
+      {
+        legend.map(({ level, meaning }) => (
+          <div class="grid grid-cols-1 gap-x-6 gap-y-1 border-b border-border py-4 sm:grid-cols-[10rem_1fr]">
+            <dt class="flex items-center gap-2">
+              <span aria-hidden="true" class="flex gap-[3px]">
+                {[1, 2, 3].map((step) => (
+                  <span
+                    class:list={[
+                      'h-[3px] w-3',
+                      step <= levelRank[level] ? 'bg-text' : 'bg-border',
+                    ]}
+                  />
+                ))}
+              </span>
+              <span class="text-[13px]">{level}</span>
+            </dt>
+            <dd class="text-muted">{meaning}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    {
+      groups.map((group) => (
+        <section>
+          <h2 class="label pt-12">{group.name}</h2>
+          <ul class="mt-6 border-t border-border">
+            {group.skills.map((skill) => (
+              <li class="grid grid-cols-[1fr_auto] gap-x-6 gap-y-1 border-b border-border py-4 sm:grid-cols-[1fr_5rem_6.5rem]">
+                <div class="min-w-0">
+                  <p>
+                    {skill.name}
+                    {skill.dormant && (
+                      <span class="ml-2 text-[12px] text-faint">dormant</span>
+                    )}
+                  </p>
+                  {skill.note && (
+                    <p class="mt-1 max-w-[62ch] text-[13px] text-faint">{skill.note}</p>
+                  )}
+                </div>
+                <p class="tnum text-right text-[13px] text-muted sm:text-left">
+                  {skill.years ? `${skill.years} yr` : '—'}
+                </p>
+                <p class="col-span-2 flex items-center gap-2 sm:col-span-1">
+                  <span aria-hidden="true" class="flex gap-[3px]">
+                    {[1, 2, 3].map((step) => (
+                      <span
+                        class:list={[
+                          'h-[3px] w-3',
+                          step <= levelRank[skill.level] ? 'bg-text' : 'bg-border',
+                        ]}
+                      />
+                    ))}
+                  </span>
+                  <span class="text-[12px] text-faint">{skill.level}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+
+    <p class="mt-12 max-w-[60ch] text-muted">
+      Anything not on this list, I have not done enough of to answer questions
+      about. That is deliberate — a keyword I cannot defend does not win a role,
+      it loses an interview.
+    </p>
+  </div>
+</Base>

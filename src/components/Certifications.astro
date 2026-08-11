@@ -1,0 +1,113 @@
+---
+import { Image } from 'astro:assets';
+import kcna from '../assets/certs/kcna.png';
+import awsSaa from '../assets/certs/aws-saa.png';
+import terraform from '../assets/certs/terraform.png';
+import networkPlus from '../assets/certs/network-plus.png';
+import gcpAce from '../assets/certs/gcp-ace.png';
+
+/**
+ * Badge images are downloaded from Credly and served from this repo — linking
+ * images.credly.com directly would be the site's only external request.
+ *
+ * `current: false` means Credly reports the credential as expired (checked
+ * 2026-08-11). Sérgio's call is to link them anyway — the industry does not
+ * treat a lapsed associate cert as a problem — so every badge is linked and
+ * the status is stated plainly instead.
+ */
+const certifications = [
+  {
+    name: 'Kubernetes and Cloud Native Associate (KCNA)',
+    issuer: 'The Linux Foundation',
+    badge: kcna,
+    current: true,
+    url: 'https://www.credly.com/badges/1cdc8823-da55-4025-9d8d-282d60849fa7/public_url',
+  },
+  {
+    name: 'AWS Certified Solutions Architect – Associate',
+    issuer: 'Amazon Web Services',
+    badge: awsSaa,
+    current: false,
+    url: 'https://www.credly.com/badges/9cea9ac7-b527-4caa-b9b4-370b0d746ede/public_url',
+  },
+  {
+    name: 'HashiCorp Certified: Terraform Associate (002)',
+    issuer: 'HashiCorp',
+    badge: terraform,
+    current: false,
+    url: 'https://www.credly.com/badges/1ff76c72-cb64-468c-8964-5c69d6c750ca/public_url',
+  },
+  {
+    name: 'Associate Cloud Engineer',
+    issuer: 'Google Cloud',
+    badge: gcpAce,
+    current: false,
+    url: 'https://www.credly.com/badges/5214de1c-9f3c-4ca7-89a6-871b07cf349f/public_url',
+  },
+  {
+    name: 'Network+',
+    issuer: 'CompTIA',
+    badge: networkPlus,
+    current: false,
+    url: 'https://www.credly.com/badges/3e35ca59-0cbe-450a-b1cf-ce32b85e0016/public_url',
+  },
+  {
+    name: 'Red Hat Certified Engineer (RHCE)',
+    issuer: 'Red Hat · ~2016',
+    badge: null,
+    current: false,
+    url: null,
+  },
+];
+---
+
+<ul class="mt-6 border-t border-border">
+  {
+    certifications.map((cert) => {
+      const inner = (
+        <>
+          <span class="flex h-10 w-10 shrink-0 items-center justify-center">
+            {cert.badge ? (
+              <Image
+                src={cert.badge}
+                alt=""
+                width={80}
+                height={80}
+                loading="lazy"
+                class="h-10 w-10 object-contain"
+              />
+            ) : (
+              <span aria-hidden="true" class="h-px w-3 bg-border" />
+            )}
+          </span>
+          <span class="min-w-0">
+            <span class="block transition-colors group-hover:text-white">
+              {cert.name}
+            </span>
+            <span class="mt-0.5 block text-[13px] text-faint">
+              {cert.issuer}
+              {!cert.current && ' · lapsed'}
+            </span>
+          </span>
+          {cert.url && (
+            <span class="link-quiet ml-auto hidden shrink-0 self-center sm:inline">
+              Verify ↗
+            </span>
+          )}
+        </>
+      );
+
+      return (
+        <li class="border-b border-border">
+          {cert.url ? (
+            <a href={cert.url} rel="noopener" class="group flex items-start gap-4 py-4">
+              {inner}
+            </a>
+          ) : (
+            <div class="flex items-start gap-4 py-4 text-muted">{inner}</div>
+          )}
+        </li>
+      );
+    })
+  }
+</ul>

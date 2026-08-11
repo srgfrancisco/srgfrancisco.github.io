@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../assets/portrait.jpg';
+import { site } from '../site';
+---
+
+<section class="hero-glow border-b border-border">
+  <div class="mx-auto w-full max-w-[52rem] px-6 pt-20 pb-16 sm:px-8 sm:pt-28 sm:pb-20">
+    <div class="flex items-center gap-6">
+      <Image
+        src={portrait}
+        alt="Sérgio Francisco"
+        width={320}
+        height={320}
+        loading="eager"
+        class="h-[120px] w-[120px] shrink-0 border border-border object-cover sm:h-[160px] sm:w-[160px]"
+      />
+      <div>
+        <p class="label">Infrastructure Engineer</p>
+        <p class="label mt-1.5">{site.location}</p>
+        <p class="label mt-1.5">{site.timezone}</p>
+      </div>
+    </div>
+
+    <h1 class="display mt-10 text-[38px] sm:text-[52px]">I make production boring.</h1>
+    <p class="mt-5 max-w-[46ch] text-[16px] text-muted sm:text-[17px]">
+      Reliable, observable and cheaper to run.
+    </p>
+    <p class="mt-5 max-w-[46ch] text-muted">
+      Seventeen years in infrastructure, six of them running Kubernetes in production
+      on EKS, AKS and GKE — from a 30-cluster global fleet to GitOps delivery with
+      Argo CD, Flux and Helm charts written in-house.
+    </p>
+    <div class="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+      <a href={site.booking} class="btn">Book a call</a>
+      <a href="#work" class="link-quiet">See selected projects</a>
+    </div>
+  </div>
+</section>

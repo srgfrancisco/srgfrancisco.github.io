@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entries: CollectionEntry<'projects'>[];
+}
+
+const { entries } = Astro.props;
+---
+
+<section id="work" aria-labelledby="work-heading" class="scroll-mt-8">
+  <div class="mx-auto w-full max-w-[52rem] px-6 sm:px-8">
+    <h2 id="work-heading" class="label pt-14">Selected projects</h2>
+    <ul class="mt-6 border-t border-border">
+      {
+        entries.map((entry) => (
+          <li class="border-b border-border">
+            <a
+              href={`/case-${entry.id}`}
+              class="group grid grid-cols-1 gap-x-6 gap-y-1 py-5 sm:grid-cols-[6.5rem_1fr] sm:py-6"
+            >
+              <span class="sm:pt-[3px]">
+                <span class="tnum block text-[12px] text-faint">
+                  {entry.data.years ?? '—'}
+                </span>
+                {
+                  entry.data.deliveredVia &&
+                    entry.data.deliveredVia !== 'Direct contract' && (
+                      <span class="mt-0.5 block text-[12px] text-faint">
+                        via {entry.data.deliveredVia}
+                      </span>
+                    )
+                }
+              </span>
+              <span class="min-w-0">
+                <span class="flex flex-wrap items-baseline gap-x-3">
+                  <span class="display text-[17px] transition-colors group-hover:text-white">
+                    {entry.data.client}
+                  </span>
+                  <span class="text-[14px] text-muted">{entry.data.title}</span>
+                </span>
+                <span class="mt-1 block text-faint transition-colors group-hover:text-muted">
+                  {entry.data.summary}
+                </span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

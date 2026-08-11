@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#08090a"/>
+  <rect x="10" y="46" width="44" height="2" fill="#787e86"/>
+  <text x="32" y="39" fill="#e6e6e6" text-anchor="middle"
+        font-family="Inter, Helvetica, Arial, sans-serif"
+        font-size="34" font-weight="600" letter-spacing="-2">SF</text>
+</svg>
