@@ -23,7 +23,12 @@ jobs:
       - name: Build
         uses: withastro/action@v3
         with:
-          package-manager: pnpm@latest
+          # Both pins are load-bearing. The action defaults to Node 20, and
+          # current pnpm requires node:sqlite, which only exists from Node 22 —
+          # the default combination fails with ERR_UNKNOWN_BUILTIN_MODULE.
+          # pnpm is pinned rather than @latest so CI resolves what was tested.
+          node-version: 24
+          package-manager: pnpm@11.17.0
 
   deploy:
     needs: build
