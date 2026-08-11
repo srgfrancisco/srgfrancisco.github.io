@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+
+const facts = [
+  ['Availability', 'Immediate'],
+  ['Engagement', 'Contractor through SF2 Tecnologia (Brazilian entity), invoiced in USD'],
+  ['Location', 'Rio de Janeiro, Brazil — remote'],
+  ['Timezone', 'BRT (UTC-3). Full overlap with US East, one hour ahead of New York'],
+  ['Work authorisation', 'Brazilian citizen. No sponsorship required'],
+];
+
+const roles = [
+  'Site Reliability Engineer',
+  'Platform Engineer',
+  'Infrastructure Engineer',
+  'Cloud Architect',
+  'DevOps Engineer',
+];
+---
+
+<Base
+  title="Hire"
+  description="Availability, engagement model and a direct way to book a call with Sérgio Francisco."
+>
+  <section class="border-b border-border">
+    <div class="mx-auto w-full max-w-[52rem] px-6 pt-16 pb-10 sm:px-8 sm:pt-20">
+      <p class="label">Hire</p>
+      <h1 class="display mt-4 text-[30px] sm:text-[38px]">
+        Available now, at Staff or Senior level.
+      </h1>
+      <p class="mt-4 max-w-[52ch] text-muted">
+        The fastest path is a call. Thirty minutes is usually enough to tell
+        whether the problem you have is the kind I am good at.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
+        <a href={site.booking} class="btn">Book a call</a>
+        <a href={`mailto:${site.email}`} class="link-quiet">{site.email}</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="mx-auto w-full max-w-[52rem] px-6 py-12 sm:px-8">
+    <h2 class="label">Details</h2>
+    <dl class="mt-6 border-t border-border">
+      {
+        facts.map(([term, value]) => (
+          <div class="grid grid-cols-1 gap-x-6 gap-y-1 border-b border-border py-4 sm:grid-cols-[10rem_1fr]">
+            <dt class="text-[13px] text-faint">{term}</dt>
+            <dd class="text-muted">{value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <h2 class="label pt-12">Titles I answer to</h2>
+    <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-muted">
+      {roles.map((role) => <li>{role}</li>)}
+    </ul>
+
+    <p class="mt-12 max-w-[60ch] text-muted">
+      Compensation depends on scope, duration and whether the engagement is
+      full-time. Bring the shape of the role to the call and we can size it
+      there.
+    </p>
+  </div>
+</Base>

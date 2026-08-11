@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import Case from '../../layouts/Case.astro';
+
+export const getStaticPaths = (async () => {
+  const entries = await getCollection('built', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { name, summary, stack, license, repo, pypi } = entry.data;
+---
+
+<Case
+  title={name}
+  eyebrow="Open source"
+  description={summary}
+  meta={license}
+  stack={stack}
+>
+  <p>
+    <a href={repo} rel="noopener">Source on GitHub</a>{
+      pypi && (
+        <>
+          {' · '}
+          <a href={pypi} rel="noopener">
+            Package on PyPI
+          </a>
+        </>
+      )
+    }
+  </p>
+  <Content />
+</Case>

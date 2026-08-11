@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'built'>;
+}
+
+const { entry } = Astro.props;
+const { name, summary, stack, license } = entry.data;
+---
+
+<section aria-labelledby="built-heading">
+  <div class="mx-auto w-full max-w-[52rem] px-6 sm:px-8">
+    <h2 id="built-heading" class="label pt-14">Built</h2>
+    <div class="mt-6 border-t border-b border-border">
+      <a
+        href={`/built/${entry.id}/`}
+        class="group grid grid-cols-1 gap-x-6 gap-y-1 py-5 sm:grid-cols-[6.5rem_1fr] sm:py-6"
+      >
+        <span class="tnum text-[12px] text-faint sm:pt-[3px]">{license}</span>
+        <span class="min-w-0">
+          <span class="display text-[17px] transition-colors group-hover:text-white"
+            >{name}</span
+          >
+          <span class="mt-1 block text-muted transition-colors group-hover:text-text"
+            >{summary}</span
+          >
+          <span class="tnum mt-2 block text-[12px] text-faint">{stack.join(' · ')}</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>

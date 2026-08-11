@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import WorkList from '../components/WorkList.astro';
+import BuiltCard from '../components/BuiltCard.astro';
+
+const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const built = (await getCollection('built', ({ data }) => !data.draft)).sort(
+  (a, b) => a.id.localeCompare(b.id)
+);
+---
+
+<Base>
+  <Hero />
+  <WorkList entries={work} />
+  {built.map((entry) => <BuiltCard entry={entry} />)}
+</Base>

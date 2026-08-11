@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../site';
+
+const certifications = [
+  'KCNA — Kubernetes and Cloud Native Associate',
+  'AWS Certified Solutions Architect – Associate',
+  'HashiCorp Certified: Terraform Associate (002)',
+  'Google Cloud Certified Associate Cloud Engineer',
+  'CompTIA Network+',
+  'Red Hat Certified Engineer (RHCE) — historical',
+];
+
+const languages = [
+  ['Portuguese', 'Native'],
+  ['English', 'Full Professional Proficiency'],
+];
+---
+
+<Base
+  title="About"
+  description="Sérgio Francisco — infrastructure engineer in Rio de Janeiro. Bio, certifications, education and languages."
+>
+  <section class="border-b border-border">
+    <div class="mx-auto w-full max-w-[52rem] px-6 pt-16 pb-10 sm:px-8 sm:pt-20">
+      <p class="label">About</p>
+      <h1 class="display mt-4 text-[30px] sm:text-[38px]">Sérgio Francisco</h1>
+    </div>
+  </section>
+
+  <div class="mx-auto w-full max-w-[52rem] px-6 py-12 sm:px-8">
+    <div class="prose">
+      <p>
+        I am an infrastructure engineer. The market calls it DevOps, SRE, Platform
+        Engineer or Cloud Architect depending on the year; the work is the same.
+        Underneath it all I am a sysadmin who kept up with the market.
+      </p>
+      <p>
+        Seventeen years, starting in September 2008 as an IT intern at RNP. Six of
+        those years running Kubernetes in production across EKS, AKS and GKE — from
+        a 30-cluster global fleet to GitOps delivery with Argo CD, Flux and Helm
+        charts written in-house. Most of what I am good at is turning an ambiguous
+        production problem into something shipped and measurable, and building the
+        tooling that keeps other teams' services reliable.
+      </p>
+      <p>
+        I have delivered as a DevOps Engineer, a Site Reliability Engineer, a
+        Platform Engineer and a Cloud Architect. I work from Rio de Janeiro, in
+        {site.timezone} — full overlap with US East.
+      </p>
+
+      <h2>Certifications</h2>
+      <ul>
+        {certifications.map((item) => <li>{item}</li>)}
+      </ul>
+
+      <h2>Education</h2>
+      <p>
+        <strong>Faculdade de Informática Lemos de Castro</strong> — Bachelor of
+        Science in Information Systems, 2007–2010.
+      </p>
+
+      <h2>Languages</h2>
+      <ul>
+        {languages.map(([name, level]) => (
+          <li>
+            <strong>{name}</strong> — {level}
+          </li>
+        ))}
+      </ul>
+
+      <h2>Elsewhere</h2>
+      <p>
+        <a href={site.github} rel="noopener">GitHub</a> ·
+        <a href={site.linkedin} rel="noopener">LinkedIn</a> ·
+        <a href={site.resume} rel="noopener">Résumé</a> ·
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+  </div>
+</Base>

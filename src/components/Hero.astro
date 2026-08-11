@@ -1,0 +1,22 @@
+---
+import { site } from '../site';
+---
+
+<section class="hero-glow border-b border-border">
+  <div class="mx-auto w-full max-w-[52rem] px-6 pt-20 pb-16 sm:px-8 sm:pt-28 sm:pb-20">
+    <p class="label">Infrastructure Engineer · {site.location}</p>
+    <h1 class="display mt-5 text-[34px] sm:text-[46px]">
+      I make other teams' services<br class="hidden sm:inline" /> reliable, observable
+      and cheaper to run.
+    </h1>
+    <p class="mt-6 max-w-[46ch] text-muted">
+      Seventeen years in infrastructure, six of them running Kubernetes in production
+      on EKS, AKS and GKE — from a 30-cluster global fleet to GitOps delivery with
+      Argo CD, Flux and Helm charts written in-house.
+    </p>
+    <div class="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+      <a href={site.booking} class="btn">Book a call</a>
+      <a href="#work" class="link-quiet">See selected work</a>
+    </div>
+  </div>
+</section>
