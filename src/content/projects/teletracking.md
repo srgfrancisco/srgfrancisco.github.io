@@ -6,7 +6,7 @@ role: Cloud Architect
 deliveredVia: Caylent
 years: "2022–2023"
 stack: [AWS, Transit Gateway, WAF, Load Balancers, Multi-region]
-order: 5
+order: 6
 verified: 2026-08-11
 ---
 

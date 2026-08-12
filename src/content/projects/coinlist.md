@@ -6,7 +6,7 @@ role: Senior DevOps Engineer
 deliveredVia: Toptal
 years: "2023–2024"
 stack: [AWS, ECS, EC2, Autoscaling, Ruby on Rails, Jenkins, GitHub Actions]
-order: 4
+order: 5
 verified: 2026-08-11
 ---
 

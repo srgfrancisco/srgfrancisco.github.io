@@ -6,7 +6,7 @@ role: Cloud Architect
 deliveredVia: Caylent
 years: "2022–2023"
 stack: [AWS, SageMaker, Terraform, GitHub Actions, TensorFlow, PyTorch]
-order: 6
+order: 7
 verified: 2026-08-11
 ---
 

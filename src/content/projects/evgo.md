@@ -6,7 +6,7 @@ role: Cloud Architect
 deliveredVia: Caylent
 years: "2022–2023"
 stack: [AWS, EKS, ECR, S3, CloudFront, Docker, Bitbucket Pipelines]
-order: 8
+order: 9
 verified: 2026-08-11
 ---
 

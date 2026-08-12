@@ -6,7 +6,7 @@ role: Cloud Architect
 deliveredVia: Caylent
 years: "2022–2023"
 stack: [AWS, ECS Fargate, CircleCI, Docker]
-order: 9
+order: 10
 verified: 2026-08-11
 ---
 

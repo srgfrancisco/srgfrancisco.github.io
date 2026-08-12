@@ -6,7 +6,7 @@ role: Cloud Architect
 deliveredVia: Caylent
 years: "2022–2023"
 stack: [AWS, Control Tower, Organizations, Terraform, IAM Identity Center, GuardDuty, CloudTrail]
-order: 7
+order: 8
 verified: 2026-08-11
 ---
 

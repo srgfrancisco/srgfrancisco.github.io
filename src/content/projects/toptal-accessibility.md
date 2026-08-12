@@ -6,7 +6,7 @@ role: Senior DevOps Engineer
 deliveredVia: Toptal
 years: "2025"
 stack: [AWS, ECS Fargate, Terraform, GitHub Actions, OIDC, RDS, SQS, SES]
-order: 3
+order: 4
 verified: 2026-08-11
 ---
 
