@@ -9,9 +9,10 @@ interface Props {
   deliveredVia?: string;
   years?: string;
   stack: string[];
+  image?: string;
 }
 
-const { title, eyebrow, description, role, deliveredVia, years, stack } =
+const { title, eyebrow, description, role, deliveredVia, years, stack, image } =
   Astro.props;
 
 const facts = [
@@ -21,7 +22,7 @@ const facts = [
 ].filter(Boolean) as [string, string][];
 ---
 
-<Base title={`${eyebrow} — ${title}`} description={description}>
+<Base title={`${eyebrow} — ${title}`} description={description} image={image}>
   <article>
     <header class="border-b border-border">
       <div class="mx-auto w-full max-w-[52rem] px-6 pt-16 pb-10 sm:px-8 sm:pt-20">
