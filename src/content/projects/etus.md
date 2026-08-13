@@ -38,9 +38,10 @@ SRE, having built the team.
 The infrastructure had accumulated rather than been designed. DigitalOcean was
 the main provider, with roughly eight servers, most of them production, and a
 dozen sites sharing a single box on free plans. Google Cloud held everything
-touching BI and the data warehouse. AWS held test servers. CloudFlare had just
-been signed on an Enterprise plan for one site. Around R$10k a month, spread
-across providers nobody owned.
+touching BI and the data warehouse. Heroku ran a slice of it, AWS held test
+servers, and an on-premises datacenter held the rest. CloudFlare had just been
+signed on an Enterprise plan for one site. Around R$10k a month, spread across
+providers nobody owned.
 
 Underneath that, the parts that actually keep you up at night. There was no
 VPC: every server was created with a public IP and left exposed, backend
