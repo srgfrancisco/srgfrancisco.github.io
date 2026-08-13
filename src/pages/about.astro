@@ -7,11 +7,39 @@ const languages = [
   ['Portuguese', 'Native'],
   ['English', 'Full Professional Proficiency'],
 ];
+
+/*
+ * Verbatim from the H2 2022 performance review at Caylent (manager plus five
+ * peers). Attribution is by role only: the peer responses were anonymous in
+ * the instrument, and the manager's answer is named in the source but was
+ * written for an internal review, not for publication. Do not add a name
+ * here without that person's consent, and do not invent an author or a
+ * title to make a quote land harder — the manager's title was Delivery
+ * Manager, not Engineering Manager.
+ */
+const quotes = [
+  [
+    'Sergio has a high say:do ratio. He consistently completes the assigned work in the allocated time and always comes prepared for customer meetings with the necessary architecture diagrams and slides.',
+    'Peer review, Caylent, 2022',
+  ],
+  [
+    "Sergio has the ability to see the overall design on a project and deliver technically. He's good at circling back to see the bigger picture, and yet play Jira stories when needed to write code or deploy infra.",
+    'Peer review, Caylent, 2022',
+  ],
+  [
+    'It is rare to see such selfless leadership from an architect in my experience.',
+    'Peer review, Caylent, 2022',
+  ],
+  [
+    'He had to develop a strong understanding of their Machine Learning stack, which is not in his background. He dove in and learned what he had to complete the migration.',
+    'Delivery Manager, Caylent, 2022',
+  ],
+];
 ---
 
 <Base
   title="About"
-  description="Sérgio Francisco — infrastructure engineer in Rio de Janeiro. Bio, certifications, education and languages."
+  description="Sérgio Francisco — infrastructure engineer in Rio de Janeiro. Bio, how I work, what colleagues said, certifications and education."
 >
   <section class="border-b border-border">
     <div class="mx-auto w-full max-w-[52rem] px-6 pt-16 pb-10 sm:px-8 sm:pt-20">
@@ -23,9 +51,10 @@ const languages = [
   <div class="mx-auto w-full max-w-[52rem] px-6 py-12 sm:px-8">
     <div class="prose">
       <p>
-        I am an infrastructure engineer. The market calls it DevOps, SRE, Platform
-        Engineer or Cloud Architect depending on the year; the work is the same.
-        Underneath it all I am a sysadmin who kept up with the market.
+        I am an infrastructure engineer. The market splits that into DevOps, Site
+        Reliability Engineer, Platform Engineer and Cloud Architect, and I have
+        delivered as each of them. Underneath it all I am a sysadmin who kept up
+        with the market.
       </p>
       <p>
         Seventeen years, starting in September 2008 as an IT intern at RNP. Six of
@@ -36,13 +65,38 @@ const languages = [
         tooling that keeps other teams' services reliable.
       </p>
       <p>
-        I have delivered as a DevOps Engineer, a Site Reliability Engineer, a
-        Platform Engineer and a Cloud Architect. I work from Rio de Janeiro, in {
-          site.timezone
-        } — full overlap with US East.
+        I work from Rio de Janeiro, in {site.timezone} — full overlap with US
+        East.
       </p>
 
     </div>
+
+    <h2 class="label pt-14">How I work</h2>
+    <div class="prose pt-6">
+      <p>
+        I do my best work with a clear goal and room to run. Tell me what has to
+        be true and by when, and I will come back with the architecture, the
+        trade-offs I rejected on the way, and a date I intend to hold.
+      </p>
+      <p>
+        I write before I build. A diagram or a short design document is how I
+        find the problem I actually have — and it gives the team something to
+        argue with now, rather than arguing with my code three weeks later. I
+        would rather be corrected on a page than in production.
+      </p>
+    </div>
+
+    <h2 class="label pt-14">What colleagues said</h2>
+    <ul class="mt-6 border-t border-border">
+      {quotes.map(([quote, attribution]) => (
+        <li class="border-b border-border py-5 sm:py-6">
+          <blockquote class="max-w-[62ch] text-[#cfd2d6] italic">
+            &ldquo;{quote}&rdquo;
+          </blockquote>
+          <p class="mt-2 text-[12px] text-faint">{attribution}</p>
+        </li>
+      ))}
+    </ul>
 
     <h2 class="label pt-14">Certifications</h2>
     <Certifications />

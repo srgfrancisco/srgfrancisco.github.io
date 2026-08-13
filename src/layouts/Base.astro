@@ -1,5 +1,11 @@
 ---
 import '@fontsource-variable/inter';
+/*
+ * Real italics for the quotes on /about. Costs one extra font file site-wide,
+ * but Inter's synthesised oblique is a sheared upright and reads as a rendering
+ * bug next to the genuine cut. Drop this import only if the italic goes away.
+ */
+import '@fontsource-variable/inter/wght-italic.css';
 import '@fontsource-variable/jetbrains-mono';
 import '@fontsource-variable/caveat';
 import '../styles/global.css';
