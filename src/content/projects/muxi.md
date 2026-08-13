@@ -15,7 +15,7 @@ stack:
     Direct Connect,
     Red Hat Enterprise Linux,
   ]
-order: 12
+order: 13
 verified: 2026-08-12
 ---
 
