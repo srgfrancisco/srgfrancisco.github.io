@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 # git worktrees, created here by convention
 .worktree/
+.claude/worktrees/
