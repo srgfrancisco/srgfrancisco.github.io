@@ -9,7 +9,7 @@ export const site = {
   resume: 'https://sergiofrancisco.com/resume',
   location: 'Rio de Janeiro, Brazil',
   timezone: 'UTC-3',
-  booking: 'https://calendar.app.google/xzqCUjzpMficGXcN9',
+  booking: 'https://calendar.app.google/PPV9eHTkB5kSNjw38',
   /** Referral link — Sérgio earns a commission on hires made through it. */
   toptal: 'https://www.toptal.com/developers/resume/sergio-francisco#BLmrlP',
 } as const;
