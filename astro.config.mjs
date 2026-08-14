@@ -34,6 +34,7 @@ export default defineConfig({
         ![
           '/og-card',
           '/resume',
+          '/calendar',
           '/archive',
           '/recommendations',
           '/page/',
