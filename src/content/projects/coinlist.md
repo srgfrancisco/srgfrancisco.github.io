@@ -1,13 +1,13 @@
 ---
 client: CoinList
 title: EC2 to ECS, at 12.5% of the cost
-summary: "Cut infrastructure cost 87.5% and application scaling time 88% on ECS."
+summary: "Cut a service's web fleet cost 87.5% and scaling time 88% on ECS."
 role: Senior DevOps Engineer
 deliveredVia: Toptal
 years: "2023–2024"
 stack: [AWS, ECS, EC2, Autoscaling, Ruby on Rails, Jenkins, GitHub Actions]
 order: 5
-verified: 2026-08-11
+verified: 2026-08-14
 ---
 
 ## The company
@@ -35,7 +35,8 @@ I also led the CI/CD migration from Jenkins to GitHub Actions.
 
 ## Result
 
-- **Infrastructure cost down 87.5%** — from $4/hour to $0.50/hour.
+- **Web fleet cost down 87.5%** — from $4/hour to $0.50/hour, measured by the
+  client on one service's web traffic during a low-traffic window.
 - **Application scaling time down 88%** — from 45 minutes to about 5.
 
 The second number matters more than the first. At 45 minutes, capacity
