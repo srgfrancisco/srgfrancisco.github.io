@@ -237,7 +237,7 @@ export const groups: SkillGroup[] = [
         years: 1,
         level: 'Strong',
         dormant: true,
-        note: '87.5% at CoinList; CI at near-neutral cost at Kojo.',
+        note: "87.5% on a service's web fleet at CoinList; CI at near-neutral cost at Kojo.",
       },
       { name: 'Redis', years: 4, level: 'Competent', dormant: true },
       { name: 'MySQL', years: 4, level: 'Competent', dormant: true },

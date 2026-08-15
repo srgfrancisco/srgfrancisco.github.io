@@ -5,9 +5,9 @@ summary: "Azure to AWS for a healthcare platform: centralised ingress and egress
 role: Cloud Architect
 deliveredVia: Caylent
 years: "2022–2023"
-stack: [AWS, Transit Gateway, WAF, Load Balancers, Multi-region]
+stack: [AWS, Transit Gateway, Network Firewall, WAF, Multi-region, Azure]
 order: 6
-verified: 2026-08-11
+verified: 2026-08-14
 ---
 
 ## The company
@@ -26,6 +26,7 @@ happening.
 
 ## What I did
 
+The engagement ran as an **AWS Migration Acceleration Program (MAP) Assess**.
 I ran discovery workshops to map the Azure footprint against the actual
 business drivers, then produced a total cost of ownership analysis covering
 licensing, hardware and operational expense — the artefact that turns "we
@@ -36,7 +37,12 @@ regions, two in the US and one in Europe.
 
 - **Transit Gateway** as the hub, centralising ingress and egress rather than
   letting each spoke manage its own path out
-- **WAF and load balancers** at the edge
+- **WAF and load balancers** at the edge, in a dedicated edge VPC where the
+  firewall subnets run **AWS Network Firewall** endpoints alongside the Transit
+  Gateway attachments, with flow logs on
+- **AWS Directory Service** and **RDS for MSSQL** with a replica in the workload
+  VPC, because the target had to interoperate with what the customer already ran
+  on Azure rather than replace it wholesale
 - Multi-region from the start, because retrofitting region isolation into a
   running healthcare platform is considerably harder than designing for it
 
