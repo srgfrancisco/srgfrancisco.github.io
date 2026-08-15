@@ -14,7 +14,16 @@ pnpm dev --background
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
 There is no test or lint script: `pnpm build` is the verification gate. Run it
-before claiming a change works.
+before claiming a change works. PRs run no checks — only pushes to `main` trigger
+a workflow — so the local build is the whole gate. Commits are GPG-signed: use
+`git commit -S`.
+
+## Social cards and thumbnails
+
+`src/lib/og-card.ts` (1200x630) and `thumb-card.ts` (336x164) render satori+sharp
+images at `/og/<slug>.png` and `/thumb/<slug>.png`, from the same content
+collections as the pages. Fix a title in the Markdown and both follow. The
+thumbnails exist for profile surfaces that ask for a small project image.
 
 ## Content
 
