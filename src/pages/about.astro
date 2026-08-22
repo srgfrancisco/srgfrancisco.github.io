@@ -13,10 +13,10 @@ const languages = [
  *
  * The first three are public LinkedIn recommendations, written by their
  * authors to be displayed, credited by name and linked to the profile that
- * carries them. Sérgio worked with all three at Muxi (acquired by Conductor,
- * now Dock); the job titles are the authors' own and are not claimed to be
- * the titles they held at the time, which is why the company sits on a
- * separate context line.
+ * carries them. All three worked with Sérgio at Muxi (acquired by Conductor,
+ * now Dock). The titles are the ones they held there, not their current
+ * ones — the point of attribution is what the author saw first-hand, so do
+ * not swap in a more impressive present-day title from their profile.
  *
  * These three are edited, and the edits are bounded: obvious grammar and
  * typo fixes only, never a change of claim, emphasis or substance. The
@@ -35,32 +35,28 @@ const languages = [
  * or a title to make a quote land harder — the manager's title was Delivery
  * Manager, not Engineering Manager.
  */
-const muxi = 'Worked together at Muxi, now Dock';
-
 const quotes = [
   {
     quote:
       "Sergio is among the most skilled people I've ever known. He's extremely organized, he always creates comprehensive planning before starting his activities, which gives the customer an assertive view of what has to be done and, consequently, brings expressive results. His work was essential to the success of the PCI-DSS project that we accomplished in record time.",
     name: 'Marcelo Moreira',
-    attribution: 'Principal Software Engineer',
+    attribution: 'Infrastructure Team Coordinator, Muxi (now Dock)',
     href: 'https://www.linkedin.com/in/marceloddm/',
-    note: muxi,
   },
   {
     quote:
       'Sérgio is one of the best professionals I have worked with in my entire life. Always proactive and happy to solve any kind of problem that appeared. He is so determined to do a good job, and he has a skill that is fundamental to any leader: he can explain any kind of hard task in an easy way, so you can easily understand what you need to do to solve a big problem. With his knowledge of Linux and Cloud, he is prepared to provide any kind of solution you can ask for. I endorse Sérgio without any doubt for any opportunity.',
     name: 'Fernando Pereira',
-    attribution: 'Senior Site Reliability Engineer',
+    attribution: 'Senior Infrastructure Analyst, Muxi (now Dock)',
     href: 'https://www.linkedin.com/in/fernando-pereira-br/',
-    note: muxi,
   },
   {
     quote:
       'Sérgio is a professional I had the privilege of knowing and working alongside. […] He has an extremely broad view of IT and its nuances, which converge into an exceptionally complete professional, capable of delivering projects of great complexity within agreed deadlines and exceeding the objectives in his care. […] His experience in IT infrastructure architecture allowed the company where we worked together to reach new levels in the development, delivery and robustness of its services.',
     name: 'Thiago Velloso',
-    attribution: 'Security Specialist',
+    attribution: 'Senior Security Analyst, Muxi (now Dock)',
     href: 'https://www.linkedin.com/in/thiago-velloso-85535b54/',
-    note: `${muxi} · Translated from Portuguese`,
+    note: 'Translated from Portuguese',
   },
   {
     quote:
@@ -154,19 +150,21 @@ const quotes = [
             &ldquo;{quote}&rdquo;
           </blockquote>
           {name ? (
-            <p class="mt-3 text-[13px] text-faint">
-              <a
-                class="link-quiet text-text hover:decoration-muted"
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {name}
-              </a>
-              {' \u2014 '}
-              {attribution}
-            </p>
-            <p class="mt-1 text-[12px] text-faint">{note}</p>
+            <>
+              <p class="mt-3 text-[13px] text-faint">
+                <a
+                  class="link-quiet text-text hover:decoration-muted"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {name}
+                </a>
+                {' \u2014 '}
+                {attribution}
+              </p>
+              {note && <p class="mt-1 text-[12px] text-faint">{note}</p>}
+            </>
           ) : (
             <p class="mt-2 text-[12px] text-faint">{attribution}</p>
           )}
