@@ -9,31 +9,75 @@ const languages = [
 ];
 
 /*
- * Verbatim from the H2 2022 performance review at Caylent (manager plus five
- * peers). Attribution is by role only: the peer responses were anonymous in
- * the instrument, and the manager's answer is named in the source but was
- * written for an internal review, not for publication. Do not add a name
- * here without that person's consent, and do not invent an author or a
- * title to make a quote land harder — the manager's title was Delivery
+ * Two sources, kept apart on purpose.
+ *
+ * The first three are public LinkedIn recommendations, written by their
+ * authors to be displayed, credited by name and linked to the profile that
+ * carries them. All three worked with Sérgio at Muxi (acquired by Conductor,
+ * now Dock). The titles are the ones they held there, not their current
+ * ones — the point of attribution is what the author saw first-hand, so do
+ * not swap in a more impressive present-day title from their profile.
+ *
+ * These three are edited, and the edits are bounded: obvious grammar and
+ * typo fixes only, never a change of claim, emphasis or substance. The
+ * Velloso recommendation was written in Portuguese — it is trimmed with
+ * marked ellipses and translated, and the translation is disclosed on the
+ * page rather than passed off as the author's English. Do not sharpen,
+ * lengthen or embellish any of them: the whole value of a recommendation is
+ * that someone else wrote it. Originals are on the LinkedIn profiles linked
+ * from each entry.
+ *
+ * The rest are verbatim from the H2 2022 performance review at Caylent
+ * (manager plus five peers). Attribution is by role only: the peer responses
+ * were anonymous in the instrument, and the manager's answer is named in the
+ * source but was written for an internal review, not for publication. Do not
+ * add a name here without that person's consent, and do not invent an author
+ * or a title to make a quote land harder — the manager's title was Delivery
  * Manager, not Engineering Manager.
  */
 const quotes = [
-  [
-    'Sergio has a high say:do ratio. He consistently completes the assigned work in the allocated time and always comes prepared for customer meetings with the necessary architecture diagrams and slides.',
-    'Peer review, Caylent, 2022',
-  ],
-  [
-    "Sergio has the ability to see the overall design on a project and deliver technically. He's good at circling back to see the bigger picture, and yet play Jira stories when needed to write code or deploy infra.",
-    'Peer review, Caylent, 2022',
-  ],
-  [
-    'It is rare to see such selfless leadership from an architect in my experience.',
-    'Peer review, Caylent, 2022',
-  ],
-  [
-    'He had to develop a strong understanding of their Machine Learning stack, which is not in his background. He dove in and learned what he had to complete the migration.',
-    'Delivery Manager, Caylent, 2022',
-  ],
+  {
+    quote:
+      "Sergio is among the most skilled people I've ever known. He's extremely organized, he always creates comprehensive planning before starting his activities, which gives the customer an assertive view of what has to be done and, consequently, brings expressive results. His work was essential to the success of the PCI-DSS project that we accomplished in record time.",
+    name: 'Marcelo Moreira',
+    attribution: 'Infrastructure Team Coordinator, Muxi (now Dock)',
+    href: 'https://www.linkedin.com/in/marceloddm/',
+  },
+  {
+    quote:
+      'Sérgio is one of the best professionals I have worked with in my entire life. Always proactive and happy to solve any kind of problem that appeared. He is so determined to do a good job, and he has a skill that is fundamental to any leader: he can explain any kind of hard task in an easy way, so you can easily understand what you need to do to solve a big problem. With his knowledge of Linux and Cloud, he is prepared to provide any kind of solution you can ask for. I endorse Sérgio without any doubt for any opportunity.',
+    name: 'Fernando Pereira',
+    attribution: 'Senior Infrastructure Analyst, Muxi (now Dock)',
+    href: 'https://www.linkedin.com/in/fernando-pereira-br/',
+  },
+  {
+    quote:
+      'Sérgio is a professional I had the privilege of knowing and working alongside. […] He has an extremely broad view of IT and its nuances, which converge into an exceptionally complete professional, capable of delivering projects of great complexity within agreed deadlines and exceeding the objectives in his care. […] His experience in IT infrastructure architecture allowed the company where we worked together to reach new levels in the development, delivery and robustness of its services.',
+    name: 'Thiago Velloso',
+    attribution: 'Senior Security Analyst, Muxi (now Dock)',
+    href: 'https://www.linkedin.com/in/thiago-velloso-85535b54/',
+    note: 'Translated from Portuguese',
+  },
+  {
+    quote:
+      'Sergio has a high say:do ratio. He consistently completes the assigned work in the allocated time and always comes prepared for customer meetings with the necessary architecture diagrams and slides.',
+    attribution: 'Peer review, Caylent, 2022',
+  },
+  {
+    quote:
+      "Sergio has the ability to see the overall design on a project and deliver technically. He's good at circling back to see the bigger picture, and yet play Jira stories when needed to write code or deploy infra.",
+    attribution: 'Peer review, Caylent, 2022',
+  },
+  {
+    quote:
+      'It is rare to see such selfless leadership from an architect in my experience.',
+    attribution: 'Peer review, Caylent, 2022',
+  },
+  {
+    quote:
+      'He had to develop a strong understanding of their Machine Learning stack, which is not in his background. He dove in and learned what he had to complete the migration.',
+    attribution: 'Delivery Manager, Caylent, 2022',
+  },
 ];
 ---
 
@@ -88,12 +132,42 @@ const quotes = [
 
     <h2 class="label pt-14">What colleagues said</h2>
     <ul class="mt-6 border-t border-border">
-      {quotes.map(([quote, attribution]) => (
-        <li class="border-b border-border py-5 sm:py-6">
-          <blockquote class="max-w-[62ch] text-[#cfd2d6] italic">
+      {quotes.map(({ quote, attribution, name, href, note }) => (
+        <li
+          class={
+            name
+              ? 'border-b border-border py-6 sm:py-8'
+              : 'border-b border-border py-5 sm:py-6'
+          }
+        >
+          <blockquote
+            class={
+              name
+                ? 'max-w-[62ch] text-[15px] text-[#cfd2d6] italic sm:text-[16px]'
+                : 'max-w-[62ch] text-[#cfd2d6] italic'
+            }
+          >
             &ldquo;{quote}&rdquo;
           </blockquote>
-          <p class="mt-2 text-[12px] text-faint">{attribution}</p>
+          {name ? (
+            <>
+              <p class="mt-3 text-[13px] text-faint">
+                <a
+                  class="link-quiet text-text hover:decoration-muted"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {name}
+                </a>
+                {' \u2014 '}
+                {attribution}
+              </p>
+              {note && <p class="mt-1 text-[12px] text-faint">{note}</p>}
+            </>
+          ) : (
+            <p class="mt-2 text-[12px] text-faint">{attribution}</p>
+          )}
         </li>
       ))}
     </ul>
