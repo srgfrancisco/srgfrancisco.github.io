@@ -12,10 +12,20 @@ const languages = [
  * Two sources, kept apart on purpose.
  *
  * The first three are public LinkedIn recommendations, written by their
- * authors to be displayed. Verbatim, credited by name and linked to the
- * profile that carries them. The Velloso quote is trimmed; every cut is
- * marked with an ellipsis and no wording inside it was changed. Do not
- * translate these — a recommendation is the author's words, not mine.
+ * authors to be displayed, credited by name and linked to the profile that
+ * carries them. Sérgio worked with all three at Muxi (acquired by Conductor,
+ * now Dock); the job titles are the authors' own and are not claimed to be
+ * the titles they held at the time, which is why the company sits on a
+ * separate context line.
+ *
+ * These three are edited, and the edits are bounded: obvious grammar and
+ * typo fixes only, never a change of claim, emphasis or substance. The
+ * Velloso recommendation was written in Portuguese — it is trimmed with
+ * marked ellipses and translated, and the translation is disclosed on the
+ * page rather than passed off as the author's English. Do not sharpen,
+ * lengthen or embellish any of them: the whole value of a recommendation is
+ * that someone else wrote it. Originals are on the LinkedIn profiles linked
+ * from each entry.
  *
  * The rest are verbatim from the H2 2022 performance review at Caylent
  * (manager plus five peers). Attribution is by role only: the peer responses
@@ -25,27 +35,32 @@ const languages = [
  * or a title to make a quote land harder — the manager's title was Delivery
  * Manager, not Engineering Manager.
  */
+const muxi = 'Worked together at Muxi, now Dock';
+
 const quotes = [
   {
     quote:
-      "Sergio is among the most skilled people I've ever known. He's extremely organized, he always creates a comprehensive planning before starting his activities, which gives the customer an assertive view of what has to be done and, consequently, brings expressive results. His work was essential to the success of the PCI-DSS project that we accomplished in a record time.",
+      "Sergio is among the most skilled people I've ever known. He's extremely organized, he always creates comprehensive planning before starting his activities, which gives the customer an assertive view of what has to be done and, consequently, brings expressive results. His work was essential to the success of the PCI-DSS project that we accomplished in record time.",
     name: 'Marcelo Moreira',
     attribution: 'Principal Software Engineer',
     href: 'https://www.linkedin.com/in/marceloddm/',
+    note: muxi,
   },
   {
     quote:
-      'Sérgio is one of the best professionals that I was worked in my entire life. Always proactive and happy to solve any kind of problem that appeared. He is so obstinated to do a good job, besides he have an skill tha is fundamental to any leader, he can explain any kind of hard task in an easy way, so you can understand easy what you need to do to solve a big problem. Your knowlegment of Linux and Cloud, he is prepared to provide any kind of solution that you can ask. I endorse without any doubt Sergio to any opportunity.',
+      'Sérgio is one of the best professionals I have worked with in my entire life. Always proactive and happy to solve any kind of problem that appeared. He is so determined to do a good job, and he has a skill that is fundamental to any leader: he can explain any kind of hard task in an easy way, so you can easily understand what you need to do to solve a big problem. With his knowledge of Linux and Cloud, he is prepared to provide any kind of solution you can ask for. I endorse Sérgio without any doubt for any opportunity.',
     name: 'Fernando Pereira',
     attribution: 'Senior Site Reliability Engineer',
     href: 'https://www.linkedin.com/in/fernando-pereira-br/',
+    note: muxi,
   },
   {
     quote:
-      'Sérgio é um profissional que tive o privilégio de conhecer e trabalhar junto. […] Possui uma visão extremamente abrangente da TI e suas nuances que convergem num profissional extremamente completo capaz de entregar projetos de grande complexidade em prazos acordados e superar os objetivos sob seus cuidados. […] Sua experiência em arquitetura de infraestrutura de TI permitiram a empresa que atuamos juntos alçar novos patamares no desenvolvimento, na prestação e robustez de seus serviços.',
+      'Sérgio is a professional I had the privilege of knowing and working alongside. […] He has an extremely broad view of IT and its nuances, which converge into an exceptionally complete professional, capable of delivering projects of great complexity within agreed deadlines and exceeding the objectives in his care. […] His experience in IT infrastructure architecture allowed the company where we worked together to reach new levels in the development, delivery and robustness of its services.',
     name: 'Thiago Velloso',
     attribution: 'Security Specialist',
     href: 'https://www.linkedin.com/in/thiago-velloso-85535b54/',
+    note: `${muxi} · Translated from Portuguese`,
   },
   {
     quote:
@@ -121,7 +136,7 @@ const quotes = [
 
     <h2 class="label pt-14">What colleagues said</h2>
     <ul class="mt-6 border-t border-border">
-      {quotes.map(({ quote, attribution, name, href }) => (
+      {quotes.map(({ quote, attribution, name, href, note }) => (
         <li
           class={
             name
@@ -151,6 +166,7 @@ const quotes = [
               {' \u2014 '}
               {attribution}
             </p>
+            <p class="mt-1 text-[12px] text-faint">{note}</p>
           ) : (
             <p class="mt-2 text-[12px] text-faint">{attribution}</p>
           )}
