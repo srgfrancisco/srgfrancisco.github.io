@@ -1,0 +1,30 @@
+---
+/**
+ * Google Tag Manager, carried over from the Hashnode setup.
+ *
+ * The container is the only thing loaded here: the GA4 property
+ * (G-0Y8CJVPG7K) fires as a tag inside it, so loading gtag.js as well would
+ * double every pageview. Add or change tags in GTM, not in this file.
+ *
+ * Production builds only — the dev server would otherwise send localhost
+ * traffic to the property.
+ */
+import { site } from '../site';
+---
+
+{
+  import.meta.env.PROD && (
+    <script is:inline define:vars={{ gtmId: site.gtmId }}>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', gtmId);
+    </script>
+  )
+}

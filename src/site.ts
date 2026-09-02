@@ -10,6 +10,8 @@ export const site = {
   location: 'Rio de Janeiro, Brazil',
   timezone: 'UTC-3',
   booking: 'https://calendar.app.google/PPV9eHTkB5kSNjw38',
+  /** GTM container carried over from Hashnode. It fires GA4 G-0Y8CJVPG7K. */
+  gtmId: 'GTM-WVBZF5P4',
   /** Referral link — Sérgio earns a commission on hires made through it. */
   toptal: 'https://www.toptal.com/developers/resume/sergio-francisco#BLmrlP',
 } as const;
