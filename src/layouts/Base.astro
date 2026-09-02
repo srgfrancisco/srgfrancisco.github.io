@@ -12,6 +12,7 @@ import '../styles/global.css';
 import { site } from '../site';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import Analytics from '../components/Analytics.astro';
 
 interface Props {
   title?: string;
@@ -36,6 +37,8 @@ const ogImage = new URL(image, Astro.site).href;
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#08090a" />
     <meta name="color-scheme" content="dark" />
+
+    <Analytics />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
