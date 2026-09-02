@@ -21,14 +21,19 @@ import { site } from '../site';
   import.meta.env.PROD && (
     <>
       <script async src={`https://www.googletagmanager.com/gtag/js?id=${site.ga4Id}`} />
-      <script is:inline define:vars={{ ga4Id: site.ga4Id }}>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', ga4Id);
-      </script>
+      {/*
+       * Interpolated with set:html rather than define:vars: define:vars wraps
+       * the script in an IIFE, which keeps `gtag` inside that closure. The
+       * config call still runs, so pageviews go out and the breakage is
+       * invisible — but nothing on the page can call gtag afterwards.
+       */}
+      <script
+        is:inline
+        set:html={`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${site.ga4Id}');`}
+      />
     </>
   )
 }
