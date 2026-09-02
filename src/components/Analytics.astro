@@ -1,10 +1,15 @@
 ---
 /**
- * Google Tag Manager, carried over from the Hashnode setup.
+ * Google Analytics 4, loaded directly rather than through Google Tag Manager.
  *
- * The container is the only thing loaded here: the GA4 property
- * (G-0Y8CJVPG7K) fires as a tag inside it, so loading gtag.js as well would
- * double every pageview. Add or change tags in GTM, not in this file.
+ * The GTM container (GTM-WVBZF5P4) was carried over from Hashnode first, and
+ * it was configured correctly — a `__googtag` tag with this Measurement ID,
+ * firing on All Pages — but the property recorded nothing. This is the
+ * snippet GA4 itself hands out for the data stream, and it removes the
+ * container from the path so that a hit either lands or doesn't.
+ *
+ * Nothing else on this site needed a tag manager, so GTM is gone rather than
+ * sitting alongside gtag.js, which would double every pageview.
  *
  * Production builds only — the dev server would otherwise send localhost
  * traffic to the property.
@@ -14,17 +19,16 @@ import { site } from '../site';
 
 {
   import.meta.env.PROD && (
-    <script is:inline define:vars={{ gtmId: site.gtmId }}>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', gtmId);
-    </script>
+    <>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${site.ga4Id}`} />
+      <script is:inline define:vars={{ ga4Id: site.ga4Id }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', ga4Id);
+      </script>
+    </>
   )
 }
