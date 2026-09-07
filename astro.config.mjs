@@ -28,11 +28,13 @@ export default defineConfig({
   site: 'https://sergiofrancisco.com',
   integrations: [
     sitemap({
-      // og-card is a rendering source, not a page. The rest are redirect stubs
-      // kept alive for the Hashnode cutover and are already marked noindex.
+      // og-card is a rendering source, not a page, and /sitemap.xml is the
+      // legacy alias of this very index. The rest are redirect stubs kept alive
+      // for the Hashnode cutover and are already marked noindex.
       filter: (page) =>
         ![
           '/og-card',
+          '/sitemap.xml',
           '/resume',
           '/calendar',
           '/archive',
