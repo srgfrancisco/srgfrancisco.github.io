@@ -7,6 +7,9 @@ deliveredVia: Caylent
 years: "2022–2023"
 stack: [AWS, SageMaker, Terraform, GitHub Actions, TensorFlow, PyTorch]
 order: 7
+upwork:
+  mark: "SageMaker"
+  line: "Recommendations and MLOps"
 verified: 2026-08-11
 ---
 

@@ -18,6 +18,9 @@ stack:
     Azure API Management,
   ]
 order: 3
+upwork:
+  mark: "AKS"
+  line: "GPU clusters, per customer"
 verified: 2026-08-12
 ---
 

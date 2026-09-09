@@ -7,6 +7,9 @@ deliveredVia: Caylent
 years: "2022–2023"
 stack: [AWS, EKS, ECR, S3, CloudFront, Docker, Bitbucket Pipelines]
 order: 9
+upwork:
+  mark: "EKS"
+  line: "Bare metal to AWS"
 verified: 2026-08-11
 ---
 

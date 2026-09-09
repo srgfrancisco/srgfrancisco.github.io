@@ -7,6 +7,9 @@ deliveredVia: Toptal
 years: "2023–2024"
 stack: [AWS, ECS, EC2, Autoscaling, Ruby on Rails, Jenkins, GitHub Actions]
 order: 5
+upwork:
+  mark: "12.5%"
+  line: "of the previous cost"
 verified: 2026-08-14
 ---
 
