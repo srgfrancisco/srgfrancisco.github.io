@@ -7,6 +7,7 @@ deliveredVia: Caylent
 years: "2022–2023"
 stack: [AWS, SageMaker, Terraform, GitHub Actions, TensorFlow, PyTorch]
 order: 7
+logo: "whatnot.png"
 verified: 2026-08-11
 ---
 

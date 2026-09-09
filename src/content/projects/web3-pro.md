@@ -7,6 +7,7 @@ deliveredVia: Caylent
 years: "2022–2023"
 stack: [AWS, Control Tower, Organizations, Terraform, IAM Identity Center, GuardDuty, CloudTrail]
 order: 8
+logo: "web3-pro.png"
 verified: 2026-08-11
 ---
 

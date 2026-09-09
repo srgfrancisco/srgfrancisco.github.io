@@ -16,6 +16,7 @@ stack:
     Red Hat Enterprise Linux,
   ]
 order: 13
+logo: "muxi.png"
 verified: 2026-08-12
 ---
 

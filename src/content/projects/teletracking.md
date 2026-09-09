@@ -7,6 +7,7 @@ deliveredVia: Caylent
 years: "2022–2023"
 stack: [AWS, Transit Gateway, Network Firewall, WAF, Multi-region, Azure]
 order: 6
+logo: "teletracking.png"
 verified: 2026-08-14
 ---
 

@@ -18,6 +18,7 @@ stack:
     Azure API Management,
   ]
 order: 3
+logo: "sight-machine.png"
 verified: 2026-08-12
 ---
 

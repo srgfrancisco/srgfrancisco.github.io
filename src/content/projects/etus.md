@@ -19,6 +19,7 @@ stack:
     Linux,
   ]
 order: 12
+logo: "etus.png"
 verified: 2026-08-12
 ---
 

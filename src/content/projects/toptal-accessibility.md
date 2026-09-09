@@ -7,6 +7,7 @@ deliveredVia: Toptal
 years: "2025"
 stack: [AWS, ECS Fargate, Terraform, GitHub Actions, OIDC, RDS, SQS, SES]
 order: 4
+logo: "toptal.png"
 verified: 2026-08-11
 ---
 

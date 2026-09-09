@@ -7,6 +7,7 @@ deliveredVia: Caylent
 years: "2022–2023"
 stack: [AWS, ECS Fargate, CircleCI, Docker]
 order: 10
+logo: "art-of-problem-solving.png"
 verified: 2026-08-11
 ---
 
