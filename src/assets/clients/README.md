@@ -16,10 +16,13 @@ artwork is light. Keep the filename equal to the content entry's id.
 
 ## Provenance
 
-All but one came from Sérgio's own logo folder outside this repo. The
-exception is `sight-machine.png`, taken from `sightmachine.com`'s
-`apple-touch-icon.png`: it is the icon alone, with no wordmark, and is the
-first one to replace if a better file turns up.
+All but one came from Sérgio, either from his logo folder outside this repo or
+handed over directly. The exception is `sight-machine.png`, taken from
+`sightmachine.com`'s `apple-touch-icon.png`: it is the icon alone, with no
+wordmark, and is the first one to replace if a better file turns up.
+
+`kojo.png` keeps the plate colour from the artwork it arrived on (#31302e)
+rather than white, because the wordmark is yellow.
 
 These are third-party trademarks, included to identify the client of a
 delivered project. They are not covered by this repository's licence.

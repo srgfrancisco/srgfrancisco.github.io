@@ -7,6 +7,7 @@ deliveredVia: Direct contract
 years: "2025–2026"
 stack: [AWS, EKS, OpenTelemetry, Argo CD, Kargo, Helm, Datadog]
 order: 1
+logo: "kojo.png"
 verified: 2026-08-11
 ---
 
