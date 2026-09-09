@@ -1,7 +1,9 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
-import type { CardContent } from '../../lib/og-card';
-import { renderUpworkThumb } from '../../lib/upwork-card';
+import {
+  renderUpworkThumb,
+  type UpworkCardContent,
+} from '../../lib/upwork-card';
 
 /**
  * One 1000x750 thumbnail per case study and per open-source project, at
@@ -9,8 +11,18 @@ import { renderUpworkThumb } from '../../lib/upwork-card';
  * `/thumb/<page-slug>.png`, so every rendering of the same project stays
  * addressable the same way.
  *
- * 1000x750 is the size an Upwork portfolio item's image is rendered at.
+ * Unlike the other two, this one does not take `CardContent`: the copy that
+ * survives Upwork's 216px grid tile is its own pair of fields on the entry.
+ * The fallback for an entry without them keeps the build green — the lead
+ * technology and the first words of the title — but it repeats the caption
+ * Upwork already prints, so it is a stopgap rather than a default worth
+ * relying on.
  */
+const fallback = (stack: string[], title: string) => ({
+  mark: stack[0],
+  line: title.split(' ').slice(0, 4).join(' '),
+});
+
 export const getStaticPaths = (async () => {
   const [projects, built] = await Promise.all([
     getCollection('projects', ({ data }) => !data.draft),
@@ -22,30 +34,27 @@ export const getStaticPaths = (async () => {
       params: { slug: `case-${entry.id}` },
       props: {
         card: {
+          ...(entry.data.upwork ??
+            fallback(entry.data.stack, entry.data.title)),
           eyebrow: entry.data.client,
-          title: entry.data.title,
-          summary: entry.data.summary,
           years: entry.data.years,
-          stack: entry.data.stack,
-        } satisfies CardContent,
+        } satisfies UpworkCardContent,
       },
     })),
     ...built.map((entry) => ({
       params: { slug: `built-${entry.id}` },
       props: {
         card: {
+          ...(entry.data.upwork ?? fallback(entry.data.stack, entry.data.name)),
           eyebrow: 'Open source',
-          title: entry.data.name,
-          summary: entry.data.summary,
-          stack: entry.data.stack,
-        } satisfies CardContent,
+        } satisfies UpworkCardContent,
       },
     })),
   ];
 }) satisfies GetStaticPaths;
 
 export const GET: APIRoute = async ({ props }) => {
-  const png = await renderUpworkThumb(props.card as CardContent);
+  const png = await renderUpworkThumb(props.card as UpworkCardContent);
   return new Response(new Uint8Array(png), {
     headers: { 'Content-Type': 'image/png' },
   });

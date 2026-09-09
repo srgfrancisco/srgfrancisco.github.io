@@ -2,21 +2,30 @@ import satori from 'satori';
 import sharp from 'sharp';
 import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
-import { site } from '../site';
-import type { CardContent } from './og-card';
 
 /**
  * Build-time renderer for the portfolio thumbnails behind `/upwork/*.png`.
  *
- * Same content and same tokens as `og-card.ts`, at the 1000x750 an Upwork
- * portfolio thumbnail is rendered at. That is 4:3 — near square — where the
- * other two renderers are landscape (1.90:1 and 2.05:1), so this is a layout
- * of its own rather than a rescale: the vertical room goes into air between
- * the three blocks rather than into more content.
+ * Upwork asks for a 1000x750 file and then never shows it near that size.
+ * Measured on the live profile: the portfolio grid renders it at 216x173 with
+ * `object-fit: cover`, and the largest it appears anywhere — the "More by"
+ * strip inside the detail modal — is 236x189. The detail modal does not
+ * enlarge it at all. So the drawing survives at roughly 21.6%, and every size
+ * below is chosen from what it becomes at that scale, not from what it looks
+ * like in the file.
  *
- * The `summary` comes back here. It was dropped from `thumb-card.ts` because
- * at 336px wide it fell under 9px and read as decoration; at three times the
- * width it is text again, and the stack line fits five names instead of three.
+ *     mark 168px -> 36px     line 58px -> 12.5px     footer 26px -> 5.6px
+ *
+ * That is the whole budget. The first version of this file reused the social
+ * card's structure — eyebrow, title, summary, stack, signature, domain — and
+ * at 21.6% everything except the title landed between 3 and 6px, which is the
+ * failure mode `thumb-card.ts` already documents at 336px. Hence the different
+ * shape here: one large mark, one short line, and a quiet footer. The project
+ * name is deliberately absent, because Upwork prints it as a caption directly
+ * under the tile and a thumbnail should not repeat its own caption.
+ *
+ * `cover` into a 1.249 box crops about 6% of a 1.333 image's width, ~15px a
+ * side, so nothing meaningful sits within 80px of the left and right edges.
  *
  * Fonts follow the same `woff` constraint as `og-card.ts`: satori does not
  * parse `woff2`, so these come from the static `@fontsource/*` packages.
@@ -28,11 +37,9 @@ const fontFile = (spec: string) => readFile(require.resolve(spec));
 const fonts = await Promise.all([
   fontFile('@fontsource/inter/files/inter-latin-400-normal.woff'),
   fontFile('@fontsource/inter/files/inter-latin-600-normal.woff'),
-  fontFile('@fontsource/caveat/files/caveat-latin-500-normal.woff'),
-]).then(([regular, semibold, script]) => [
+]).then(([regular, semibold]) => [
   { name: 'Inter', data: regular, weight: 400 as const, style: 'normal' as const },
   { name: 'Inter', data: semibold, weight: 600 as const, style: 'normal' as const },
-  { name: 'Caveat', data: script, weight: 500 as const, style: 'normal' as const },
 ]);
 
 /** Token values mirrored from `src/styles/global.css`; satori has no CSS vars. */
@@ -44,9 +51,35 @@ const color = {
   border: '#1c1f23',
 };
 
+/**
+ * One accent per mark, so fourteen cards do not read as one card in the grid.
+ * These are the vendors' own well-known hues, applied to a word rather than to
+ * a logo — no third-party mark is reproduced. Anything unlisted stays on the
+ * site's own foreground colour, which is the right answer for `12.5%` and
+ * `WCAG 2.2`, where there is no vendor to point at.
+ */
+const accents: Record<string, string> = {
+  Fargate: '#ff9900',
+  ECS: '#ff9900',
+  EKS: '#ff9900',
+  Graviton: '#ff9900',
+  SageMaker: '#ff9900',
+  'Control Tower': '#ff9900',
+  'Transit Gateway': '#ff9900',
+  GCP: '#4285f4',
+  AKS: '#0089d6',
+  Terraform: '#7b42bc',
+  OpenTelemetry: '#f5a800',
+  Python: '#4b8bbe',
+};
+
 const WIDTH = 1000;
 const HEIGHT = 750;
-const PADDING = 64;
+/**
+ * Wide enough that the ~15px-a-side `cover` crop only ever eats padding. The
+ * social card's 64px would leave 49px, which starts to look like a mistake.
+ */
+const PADDING = 96;
 
 type Node = {
   type: string;
@@ -59,21 +92,52 @@ const el = (
   children?: unknown
 ): Node => ({ type, props: { style, children } });
 
+const CONTENT_WIDTH = WIDTH - PADDING * 2;
+
 /**
- * Titles run from 24 to 52 characters across the collection. Two lines is the
- * comfortable height here; stepping the size keeps the long ones from taking a
- * third without shrinking the short ones away from the edges.
+ * Advance width per character as a fraction of the font size, for Inter at
+ * weight 600. Stepping the size by `mark.length` instead — the first attempt —
+ * clipped `SageMaker` and `OpenTelemetry` off the right edge, because a string
+ * of capitals is roughly a third wider than the same count of lowercase.
  */
-const titleSize = (title: string) => {
-  if (title.length > 46) return 50;
-  if (title.length > 34) return 56;
-  return 62;
+const ADVANCE = { upper: 0.72, lower: 0.55, space: 0.26 };
+
+const estimateWidth = (text: string, size: number) =>
+  size *
+  [...text].reduce((sum, ch) => {
+    if (ch === ' ') return sum + ADVANCE.space;
+    // Digits and punctuation sit close enough to capitals to share the number.
+    return sum + (ch === ch.toLowerCase() && ch !== ch.toUpperCase()
+      ? ADVANCE.lower
+      : ADVANCE.upper);
+  }, 0);
+
+/**
+ * Marks run from 3 characters (`ECS`) to 15 (`Transit Gateway`). 168px is as
+ * large as the short ones want to be; anything wider than the column shrinks
+ * until it fits on one line. The 0.96 keeps a margin against the estimate
+ * being optimistic — the contact sheet in the commit message is the check that
+ * it is not.
+ */
+const markSize = (mark: string) => {
+  const fitted = (CONTENT_WIDTH * 0.96) / (estimateWidth(mark, 1) || 1);
+  return Math.min(168, Math.floor(fitted));
 };
 
-export async function renderUpworkThumb(content: CardContent): Promise<Buffer> {
-  const meta = [content.eyebrow.toUpperCase(), content.years]
-    .filter(Boolean)
-    .join(' · ');
+export interface UpworkCardContent {
+  /** Headline technology, drawn very large. */
+  mark: string;
+  /** Two to four words for what was done. */
+  line: string;
+  /** Client, or "Open source" — footer texture, not a headline. */
+  eyebrow: string;
+  years?: string;
+}
+
+export async function renderUpworkThumb(
+  content: UpworkCardContent
+): Promise<Buffer> {
+  const meta = [content.eyebrow, content.years].filter(Boolean).join(' · ');
 
   const svg = await satori(
     el(
@@ -92,84 +156,46 @@ export async function renderUpworkThumb(content: CardContent): Promise<Buffer> {
         fontFamily: 'Inter',
       },
       [
-        el(
-          'div',
-          {
-            display: 'flex',
-            fontSize: 18,
-            letterSpacing: 1.8,
-            color: color.faint,
-            fontWeight: 500,
-          },
-          meta
-        ),
+        // Spacer. The mark sits below centre, clear of the play-button overlay
+        // Upwork paints over the middle of every grid tile.
+        el('div', { display: 'flex' }),
         el('div', { display: 'flex', flexDirection: 'column' }, [
           el(
             'div',
             {
               display: 'flex',
-              fontSize: titleSize(content.title),
+              fontSize: markSize(content.mark),
               fontWeight: 600,
-              letterSpacing: -1.6,
-              lineHeight: 1.08,
-              color: color.text,
+              letterSpacing: -4,
+              lineHeight: 1,
+              color: accents[content.mark] ?? color.text,
             },
-            content.title
+            content.mark
           ),
           el(
             'div',
             {
               display: 'flex',
-              marginTop: 26,
-              fontSize: 27,
-              lineHeight: 1.45,
-              color: color.muted,
+              marginTop: 28,
+              fontSize: 58,
+              fontWeight: 600,
+              letterSpacing: -1.2,
+              lineHeight: 1.15,
+              color: color.text,
             },
-            content.summary
+            content.line
           ),
         ]),
         el(
           'div',
           {
             display: 'flex',
-            flexDirection: 'column',
             borderTop: `1px solid ${color.border}`,
             paddingTop: 26,
+            fontSize: 26,
+            color: color.faint,
           },
-          [
-            el(
-              'div',
-              { display: 'flex', fontSize: 17, color: color.faint },
-              // Five is what fits on one line at 17px without wrapping.
-              content.stack.slice(0, 5).join('  ·  ')
-            ),
-            el(
-              'div',
-              {
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'flex-end',
-                marginTop: 20,
-              },
-              [
-                el(
-                  'div',
-                  {
-                    display: 'flex',
-                    fontFamily: 'Caveat',
-                    fontSize: 40,
-                    color: color.text,
-                  },
-                  site.name
-                ),
-                el(
-                  'div',
-                  { display: 'flex', fontSize: 18, color: color.faint },
-                  'sergiofrancisco.com'
-                ),
-              ]
-            ),
-          ]
+          meta
         ),
       ]
     ) as never,
