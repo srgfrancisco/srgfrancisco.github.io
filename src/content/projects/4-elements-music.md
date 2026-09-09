@@ -7,9 +7,7 @@ deliveredVia: Toptal
 years: "2024"
 stack: [AWS, ECS Fargate, Terraform, RDS, OpenSearch, GitHub Actions, CodeDeploy, Cloudflare]
 order: 11
-upwork:
-  mark: "Fargate"
-  line: "EC2 box to containers"
+logo: "4-elements-music.png"
 verified: 2026-08-11
 ---
 

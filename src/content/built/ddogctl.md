@@ -5,9 +5,6 @@ pypi: https://pypi.org/project/ddogctl
 license: MIT
 summary: "A CLI for the Datadog API, built end to end with Claude Code as the method."
 stack: [Python 3.10+, Datadog API, Claude Code, PyPI]
-upwork:
-  mark: "Python"
-  line: "A CLI for Datadog"
 verified: 2026-08-11
 ---
 

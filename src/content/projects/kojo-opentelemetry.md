@@ -7,9 +7,6 @@ deliveredVia: Direct contract
 years: "2025–2026"
 stack: [AWS, EKS, OpenTelemetry, Argo CD, Kargo, Helm, Datadog]
 order: 1
-upwork:
-  mark: "OpenTelemetry"
-  line: "Tracing as a default"
 verified: 2026-08-11
 ---
 

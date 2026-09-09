@@ -7,9 +7,6 @@ deliveredVia: Direct contract
 years: "2025–2026"
 stack: [GitHub Actions, CircleCI, AWS Graviton, Node.js, Claude Code]
 order: 2
-upwork:
-  mark: "Graviton"
-  line: "Half the pipeline time"
 verified: 2026-08-11
 ---
 

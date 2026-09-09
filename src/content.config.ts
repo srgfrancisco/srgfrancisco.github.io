@@ -20,24 +20,15 @@ import { glob } from 'astro/loaders';
  * worse than an empty column.
  */
 /**
- * Copy for the Upwork portfolio thumbnail, which is a different problem from
- * the other two card surfaces. Upwork renders the image at 216x173 in the
- * profile grid and never larger than 236x189 anywhere — measured on the live
- * profile, not assumed — so about a fifth of the drawn size survives. Only two
- * pieces of text can be read at that scale, and the project name is already
- * printed as a caption directly under the tile.
+ * Filename of the client's logo inside `src/assets/clients`, drawn on the
+ * Upwork portfolio thumbnail. Optional, and expected to stay that way for
+ * some entries: `upwork-card.ts` falls back to a monogram built from the
+ * client name, so a missing logo is a quieter card rather than a broken one.
  *
- * Both fields are copy rather than fact, so neither carries the `verified`
- * contract the rest of the schema enforces. They are optional: `upwork-card.ts`
- * falls back to the stack and the title, which is legible but repeats the
- * caption and puts the same word on eight AWS cards at once.
+ * This is the one field here that points at a third-party trademark, so it is
+ * deliberately explicit per project rather than guessed from the client name.
  */
-const upworkCard = z.object({
-  /** The headline technology, drawn very large. Keep it under ~15 characters. */
-  mark: z.string().max(20),
-  /** Two to four words for what was done. Not the title — the caption has it. */
-  line: z.string().max(32),
-});
+const clientLogo = z.string().regex(/^[a-z0-9-]+\.(svg|png)$/);
 
 const projects = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: './src/content/projects' }),
@@ -53,7 +44,7 @@ const projects = defineCollection({
       .regex(/^\d{4}(–\d{4})?$/, 'expected YYYY or YYYY–YYYY (en dash)')
       .optional(),
     stack: z.array(z.string()).min(1),
-    upwork: upworkCard.optional(),
+    logo: clientLogo.optional(),
     order: z.number(),
     verified: z.coerce.date(),
     draft: z.boolean().default(false),
@@ -69,7 +60,7 @@ const built = defineCollection({
     license: z.string(),
     summary: z.string().max(90),
     stack: z.array(z.string()).min(1),
-    upwork: upworkCard.optional(),
+    logo: clientLogo.optional(),
     verified: z.coerce.date(),
     draft: z.boolean().default(false),
   }),

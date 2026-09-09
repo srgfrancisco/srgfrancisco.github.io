@@ -16,9 +16,6 @@ stack:
     Red Hat Enterprise Linux,
   ]
 order: 13
-upwork:
-  mark: "Terraform"
-  line: "Two datacenters to AWS"
 verified: 2026-08-12
 ---
 

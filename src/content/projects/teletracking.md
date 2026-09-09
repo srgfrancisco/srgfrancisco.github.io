@@ -7,9 +7,7 @@ deliveredVia: Caylent
 years: "2022–2023"
 stack: [AWS, Transit Gateway, Network Firewall, WAF, Multi-region, Azure]
 order: 6
-upwork:
-  mark: "Transit Gateway"
-  line: "Hub-and-spoke, three regions"
+logo: "teletracking.png"
 verified: 2026-08-14
 ---
 

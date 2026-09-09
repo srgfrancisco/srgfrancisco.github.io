@@ -19,9 +19,6 @@ stack:
     Linux,
   ]
 order: 12
-upwork:
-  mark: "GCP"
-  line: "Three providers consolidated"
 verified: 2026-08-12
 ---
 
