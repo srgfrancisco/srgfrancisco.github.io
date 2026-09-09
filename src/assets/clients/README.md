@@ -24,5 +24,10 @@ wordmark, and is the first one to replace if a better file turns up.
 `kojo.png` keeps the plate colour from the artwork it arrived on (#31302e)
 rather than white, because the wordmark is yellow.
 
+`toptal-mark.png` is the blue mark cropped out of the full lockup, kept as an
+alternative to `toptal.png`. The lockup is wired up because it still reads at
+48px and matches the other lockups in the set; the mark is bolder in a grid
+but says less. Swapping is one line of frontmatter.
+
 These are third-party trademarks, included to identify the client of a
 delivered project. They are not covered by this repository's licence.
