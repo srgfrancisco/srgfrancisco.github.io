@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+import ClientLogos from '../components/ClientLogos.astro';
 import WorkList from '../components/WorkList.astro';
 import BuiltCard from '../components/BuiltCard.astro';
 
@@ -15,6 +16,7 @@ const built = (await getCollection('built', ({ data }) => !data.draft)).sort(
 
 <Base>
   <Hero />
+  <ClientLogos entries={work} />
   <WorkList entries={work} />
   {built.map((entry) => <BuiltCard entry={entry} />)}
 </Base>

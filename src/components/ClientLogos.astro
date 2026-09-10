@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { uniqueLogos } from '../lib/client-logos';
+
+/**
+ * The client logo strip on the home page.
+ *
+ * The tiles arrive square and already sitting on their own background, so they
+ * are drawn as tiles rather than as free-floating marks: a grid of small chips
+ * against the page, which is the same move the inverted `.btn` already makes.
+ * Recolouring them in CSS is not an option — two of the twelve are light
+ * artwork on a dark plate, and `invert` or `mix-blend-mode` would mangle those
+ * two trademarks while appearing to work on the other ten.
+ *
+ * Colour on this site enters here and nowhere else.
+ */
+
+interface Props {
+  entries: CollectionEntry<'projects'>[];
+}
+
+const { entries } = Astro.props;
+const logos = uniqueLogos(entries);
+---
+
+<section aria-labelledby="clients-heading">
+  <div class="mx-auto w-full max-w-[52rem] px-6 sm:px-8">
+    <h2 id="clients-heading" class="label pt-14">Clients</h2>
+    <p class="mt-4 max-w-[56ch] text-[13px] text-faint">
+      Companies whose infrastructure I have worked on. Several were delivered
+      through Caylent, Toptal or Curotec — each case study names the contract.
+    </p>
+    <ul
+      class="mt-6 grid grid-cols-3 gap-px border border-border bg-border sm:grid-cols-4 md:grid-cols-6"
+    >
+      {
+        logos.map(({ src, client, href }) => (
+          <li class="bg-bg">
+            <a
+              href={href}
+              class="group flex aspect-square items-center justify-center p-3 sm:p-4"
+            >
+              <Image
+                src={src}
+                alt={client}
+                width={112}
+                height={112}
+                loading="lazy"
+                class="h-full w-full object-contain opacity-85 transition-opacity group-hover:opacity-100"
+              />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
