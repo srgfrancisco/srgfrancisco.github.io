@@ -2,7 +2,6 @@
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import Case from '../layouts/Case.astro';
-import { logoFor } from '../lib/client-logos';
 
 /**
  * The route is `/case-<slug>` rather than `/projects/<slug>` on purpose: the
@@ -20,8 +19,7 @@ export const getStaticPaths = (async () => {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { client, title, summary, role, deliveredVia, years, stack, logo } =
-  entry.data;
+const { client, title, summary, role, deliveredVia, years, stack } = entry.data;
 ---
 
 <Case
@@ -33,7 +31,6 @@ const { client, title, summary, role, deliveredVia, years, stack, logo } =
   years={years}
   stack={stack}
   image={`/og/case-${entry.id}.png`}
-  logo={logo ? logoFor(logo) : undefined}
 >
   <Content />
 </Case>
